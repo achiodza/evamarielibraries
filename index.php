@@ -143,11 +143,11 @@
         },
         body: JSON.stringify({
           email: email,
-          pwd: password
+          password: password
         })
       })
       .then(response => response.json())
-      console.log($response)
+      
       .then(data => {
         loader.style.display = 'none'; // Hide loader
         if (data.jwt) {
