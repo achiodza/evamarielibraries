@@ -65,218 +65,9 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Eva Marie Libraries</span>
-      </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
-            </div>
-            <span class="nav-link-text ms-1">Library Dashboard</span>
-          </a>
-        </li>
-     
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Borrowing History</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/librarybooks.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">book</i>
-            </div>
-            <span class="nav-link-text ms-1">Library Books</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white bg-gradient-info active" href="../pages/librarytoys.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">book</i>
-            </div>
-            <span class="nav-link-text ms-1">Childrens Toys</span>
-          </a>
-        </li>
-      
-    
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link text-white " href="http://localhost/login/register.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Manage Users</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    
-  </aside>
+<?php include './includes/navheader.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard </a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Harare | Eva Marie Libraries</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0"><b style="color: blue;">Eva Marie </b>Libraries</h6>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline">
-              
-              <div class="clock" id="clock" style="color: blue;"></div>
-            </div>
-          </div>
-          <script>
-            function updateClock() {
-              const now = new Date();
-              const hours = now.getHours().toString().padStart(2, '0');
-              const minutes = now.getMinutes().toString().padStart(2, '0');
-              const seconds = now.getSeconds().toString().padStart(2, '0');
-              const timeString = `${hours}:${minutes}:${seconds}`;
-              
-              document.getElementById('clock').textContent = timeString;
-            }
-            
-            // Update the clock every second
-            setInterval(updateClock, 1000);
-            
-            // Initial call to display the clock immediately
-            updateClock();
-            </script>
-          <ul class="navbar-nav  justify-content-end">
-          
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              
-            </li>
-            <li class="nav-item d-flex align-items-center">
-              <button style="margin-left: 10px;" class="btn bg-gradient-dark mb-0" onclick="window.location.href='addtoy.html'">Add Toy(s)</button>
-  
-          </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-    // Add click event listener to the button
-    document.getElementById("payTollGateBtn").addEventListener("click", function() {
-        // Send an AJAX request to the server
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://127.0.0.1:5000/readcard", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    // Request was successful
-                    console.log("Payment processing completed.");
-                } else {
-                    // Request failed
-                    console.error("Error processing payment:", xhr.status, xhr.statusText);
-                }
-            }
-        };
-        xhr.send();
-    });
-});
-
-    </script>
-    <!-- End Navbar -->
-
-    <!-- Script to Fetch Data -->
-    <script>
-      // Function to fetch the JSON data
-      function fetchTransactionData() {
-          // Fetch the JSON file
-          fetch('history_transactions.json')
-              .then(response => response.json())
-              .then(data => {
-                  // Get the last record from the data array
-                  const lastRecord = data[data.length - 1];
-  
-                  // Display the cardid in the HTML block
-                  document.getElementById('transaction-cardid').textContent = lastRecord.getuid;
-                  
-                  // Display the date time in the HTML block
-                  document.getElementById('transaction-time').textContent = lastRecord.date;
-  
-                  // Display the amount in the HTML block
-                  document.getElementById('transaction-amount').textContent = lastRecord.amount;
-              })
-              .catch(error => console.error('Error fetching transaction data:', error));
-      }
-  
-      // Call the function to fetch and display transaction data
-      fetchTransactionData();
-  </script>
-  
-
-
-    <script>
-      // Fetch the JSON data
-      fetch('history_transactions.json')
-          .then(response => response.json())
-          .then(data => {
-              const tableBody = document.getElementById('transaction-table-body');
-
-              // Iterate through each transaction in the data
-              data.forEach((transaction, index) => {
-                  // Create a table row
-                  const row = document.createElement('tr');
-
-                  // Create table data cells and populate them with transaction information
-                  const transactionIDCell = document.createElement('td');
-                  transactionIDCell.textContent = transaction.getuid;// Assuming transaction ID is the index + 1
-                  row.appendChild(transactionIDCell);
-
-                  const dateCell = document.createElement('td');
-                  dateCell.textContent = transaction.date;
-                  row.appendChild(dateCell);
-
-                  const amountCell = document.createElement('td');
-                  amountCell.textContent = transaction.amount !== null ? '$' + transaction.amount.toFixed(2) : 'N/A';
-                  row.appendChild(amountCell);
-
-                  // Append the row to the table body
-                  tableBody.appendChild(row);
-              });
-          })
-          .catch(error => console.error('Error fetching transaction data:', error));
-  </script>
 
   <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
@@ -296,8 +87,8 @@
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Toy Name</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Genre</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Availability</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                         </tr>
@@ -309,8 +100,8 @@
                                             <th></th>
                                         </tr> -->
                                     </thead>
-                                    <tbody id="book-table-body">
-                                        <!-- Book information will be populated here -->
+                                    <tbody id="toy-table-body">
+                                        <!-- toy information will be populated here -->
                                     </tbody>
                                 </table>
                             </div>
@@ -337,37 +128,37 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('http://203.161.49.218:1337/api/toys-metas/', {
+        fetch('http://203.161.49.218:1337/api/toymetas/', {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer 54afcf2adc076c68aec973bb9af9f40e2a636e8cb4dea8d1587ee653a13e3dff7c0a80dc640a506f951eab03413f161d8f9fea6cb0122bb3974fa5eb6536be36060f73e05405266e4bfaf10f20943b272ae0a723de57f1b6894b71eba26a1d45e32ca15e085cb28fa9967d3782ac006469a6aca7434bba33c8933a004070cab2'
+                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
             }
         })
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('book-table-body');
-            data.data.forEach(book => {
+            const tableBody = document.getElementById('toy-table-body');
+            data.data.forEach(toy => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
-                                <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
+                                <h6 class="mb-0 text-sm">${toy.attributes.name}</h6>
+                                <p class="text-xs text-secondary mb-0">${toy.attributes.type}</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <p class="text-xs mb-0">${book.attributes.discription}</p>
+                        <p class="text-xs mb-0">${toy.attributes.price}</p>
                     </td>
                     <td>
-                        <p class="text-xs mb-0">${book.attributes.genre}</p>
+                        <p class="text-xs mb-0">${toy.attributes.ageRange}</p>
                     </td>
                     <td>
-                        <p class="text-xs mb-0">${book.attributes.availability}</p>
+                        <p class="text-xs mb-0">${toy.attributes.isInStock}</p>
                     </td>
                     <td>
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit book">
+                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Record">
                             Edit
                         </a>
                     </td>
@@ -393,7 +184,7 @@
         const genreFilter = document.getElementById('filter-genre').value.toLowerCase();
         const availabilityFilter = document.getElementById('filter-availability').value.toLowerCase();
 
-        const rows = document.querySelectorAll('#book-table-body tr');
+        const rows = document.querySelectorAll('#toy-table-body tr');
         rows.forEach(row => {
             const titleAuthor = row.cells[0].innerText.toLowerCase();
             const description = row.cells[1].innerText.toLowerCase();
