@@ -65,143 +65,10 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="#" target="_blank">
-        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Eva Marie Libraries</span>
-      </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
-            </div>
-            <span class="nav-link-text ms-1">Library Dashboard</span>
-          </a>
-        </li>
-     
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Borrowing History</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white bg-gradient-info active" href="../pages/librarybooks.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">book</i>
-            </div>
-            <span class="nav-link-text ms-1">Library Books</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/librarytoys.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">car</i>
-            </div>
-            <span class="nav-link-text ms-1">Childrens Toys</span>
-          </a>
-        </li>
-      
-    
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">User Management</span>
-          </a>
-        </li>
-     -->
-        <li class="nav-item">
-          <a class="nav-link text-white" href="../register.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Manage Users</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    
-  </aside>
+<?php include './includes/navheader.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard </a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Harare | Eva Marie Libraries</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0"><b style="color: blue;">Eva Marie </b>Libraries</h6>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline">
-              
-              <div class="clock" id="clock" style="color: blue;"></div>
-            </div>
-          </div>
-          <script>
-            function updateClock() {
-              const now = new Date();
-              const hours = now.getHours().toString().padStart(2, '0');
-              const minutes = now.getMinutes().toString().padStart(2, '0');
-              const seconds = now.getSeconds().toString().padStart(2, '0');
-              const timeString = `${hours}:${minutes}:${seconds}`;
-              
-              document.getElementById('clock').textContent = timeString;
-            }
-            
-            // Update the clock every second
-            setInterval(updateClock, 1000);
-            
-            // Initial call to display the clock immediately
-            updateClock();
-            </script>
-          <ul class="navbar-nav  justify-content-end">
-          
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              
-            </li>
-            <li class="nav-item d-flex align-items-center">
-              <button class="btn bg-gradient-dark mb-0" onclick="window.location.href='addbook.php'">Add Book</button>
-          </li>
-          <li class="nav-item d-flex align-items-center">
-            <button style="margin-left: 10px;" class="btn bg-gradient-dark mb-0" onclick="window.location.href='addtoy.php'">Add Toy(s)</button>
-
-        </li>          </ul>
-        </div>
-      </div>
-    </nav>
+   
    
     <!-- End Navbar -->
 
@@ -328,7 +195,7 @@
         fetch('http://203.161.49.218:1337/api/books-metas/', {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer 54afcf2adc076c68aec973bb9af9f40e2a636e8cb4dea8d1587ee653a13e3dff7c0a80dc640a506f951eab03413f161d8f9fea6cb0122bb3974fa5eb6536be36060f73e05405266e4bfaf10f20943b272ae0a723de57f1b6894b71eba26a1d45e32ca15e085cb28fa9967d3782ac006469a6aca7434bba33c8933a004070cab2'
+                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
             }
         })
         .then(response => response.json())
