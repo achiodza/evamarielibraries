@@ -147,6 +147,7 @@
         })
       })
       .then(response => response.json())
+      console.log($response)
       .then(data => {
         loader.style.display = 'none'; // Hide loader
         if (data.jwt) {
