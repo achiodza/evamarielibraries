@@ -151,10 +151,18 @@
       return response.json();
     })
     .then(data => {
-      // Assuming the server returns the user data with a pwd field
-      if (data.pwd && data.pwd === password) {
+      if (data.length === 0) {
+        errorMessage.textContent = 'Login failed: Invalid credentials';
+        return;
+      }
+
+      const user = data[0];
+      console.log('Stored password (user.pwd):', user.pwd);
+console.log('Entered password (password):', password);
+      if (user.pwd && user.pwd === password) {
         window.location.href = './pages/dashboard.php';
       } else {
+        console.log('Password comparison result:', user.pwd === password);
         errorMessage.textContent = 'Login failed: Invalid credentials';
       }
     })
@@ -165,7 +173,6 @@
     });
   });
 </script>
-
 </body>
 
 </html>
