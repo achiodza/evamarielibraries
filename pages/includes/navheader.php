@@ -10,7 +10,7 @@
         </li>
      
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
+          <a class="nav-link text-white " href="../pages/billing.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -19,7 +19,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/librarybooks.html">
+          <a class="nav-link text-white " href="../pages/librarybooks.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">book</i>
             </div>
@@ -27,7 +27,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/librarytoys.html">
+          <a class="nav-link text-white " href="../pages/librarytoys.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">toys</i>
             </div>
@@ -41,7 +41,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link text-white " href="http://localhost/login/register.php">
+          <a class="nav-link text-white " href=".../login.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
@@ -110,11 +110,11 @@
               
             </li>
             <li class="nav-item d-flex align-items-center">
-              <button class="btn bg-gradient-dark mb-0" onclick="window.location.href='addbook.html'">Add Book</button>
+              <button class="btn bg-gradient-dark mb-0" onclick="window.location.href='addbook.php'">Add Book</button>
 
           </li>
           <li class="nav-item d-flex align-items-center">
-            <button style="margin-left: 10px;" class="btn bg-gradient-dark mb-0" onclick="window.location.href='addtoy.html'">Add Toy(s)</button>
+            <button style="margin-left: 10px;" class="btn bg-gradient-dark mb-0" onclick="window.location.href='addtoy.php'">Add Toy(s)</button>
 
         </li>
           </ul>

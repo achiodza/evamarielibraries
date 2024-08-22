@@ -30,7 +30,7 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+      <a class="navbar-brand m-0" href="#" target="_blank">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eva Marie Libraries</span>
       </a>
@@ -63,7 +63,7 @@
                     try {
                         const response = await fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
                             headers: {
-                                'Authorization': 'Bearer 54afcf2adc076c68aec973bb9af9f40e2a636e8cb4dea8d1587ee653a13e3dff7c0a80dc640a506f951eab03413f161d8f9fea6cb0122bb3974fa5eb6536be36060f73e05405266e4bfaf10f20943b272ae0a723de57f1b6894b71eba26a1d45e32ca15e085cb28fa9967d3782ac006469a6aca7434bba33c8933a004070cab2'
+                                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
                             }
                         });
                         const data = await response.json();
@@ -110,7 +110,7 @@
         document.addEventListener('DOMContentLoaded', () => {
           // Define the endpoint URL and the authorization token
           const endpoint = 'http://203.161.49.218:1337/api/books-metas/';
-          const token = '54afcf2adc076c68aec973bb9af9f40e2a636e8cb4dea8d1587ee653a13e3dff7c0a80dc640a506f951eab03413f161d8f9fea6cb0122bb3974fa5eb6536be36060f73e05405266e4bfaf10f20943b272ae0a723de57f1b6894b71eba26a1d45e32ca15e085cb28fa9967d3782ac006469a6aca7434bba33c8933a004070cab2';
+          const token = '8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
       
           // Fetch total books from the booksmeta endpoint
           fetch(endpoint, {
@@ -203,7 +203,7 @@
             // Fetch book details from the endpoint
             fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
               headers: {
-                'Authorization': 'Bearer cc1a1f18d2421e5799c091e4af37ec589b999d76a58fbd4a9ba3078917d017196fb9476baac00afae68494a20b9703f2cf3bc05137e2a265ec053cc8a30602409ee8c1c1dba7c55edf86c926b2c9dd5d48e39fb11cd1c42107060e52741e564d9a085d197a65b716ceb7c03d11714339f2f594fd39dddffe1475b8cd5c83f158',
+                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
                 'Content-Type': 'application/json'
               }
             })
@@ -266,7 +266,7 @@
         // Fetch book details from the endpoint
         fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
           headers: {
-            'Authorization': 'Bearer cc1a1f18d2421e5799c091e4af37ec589b999d76a58fbd4a9ba3078917d017196fb9476baac00afae68494a20b9703f2cf3bc05137e2a265ec053cc8a30602409ee8c1c1dba7c55edf86c926b2c9dd5d48e39fb11cd1c42107060e52741e564d9a085d197a65b716ceb7c03d11714339f2f594fd39dddffe1475b8cd5c83f158',
+            'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
             'Content-Type': 'application/json'
           }
         })
