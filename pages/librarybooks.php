@@ -66,72 +66,8 @@
 
 <body class="g-sidenav-show  bg-gray-200">
 <?php include './includes/navheader.php'; ?>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-   
    
     <!-- End Navbar -->
-
-    <!-- Script to Fetch Data -->
-    <script>
-      // Function to fetch the JSON data
-      function fetchTransactionData() {
-          // Fetch the JSON file
-          fetch('history_transactions.json')
-              .then(response => response.json())
-              .then(data => {
-                  // Get the last record from the data array
-                  const lastRecord = data[data.length - 1];
-  
-                  // Display the cardid in the HTML block
-                  document.getElementById('transaction-cardid').textContent = lastRecord.getuid;
-                  
-                  // Display the date time in the HTML block
-                  document.getElementById('transaction-time').textContent = lastRecord.date;
-  
-                  // Display the amount in the HTML block
-                  document.getElementById('transaction-amount').textContent = lastRecord.amount;
-              })
-              .catch(error => console.error('Error fetching transaction data:', error));
-      }
-  
-      // Call the function to fetch and display transaction data
-      fetchTransactionData();
-  </script>
-  
-
-
-    <script>
-      // Fetch the JSON data
-      fetch('history_transactions.json')
-          .then(response => response.json())
-          .then(data => {
-              const tableBody = document.getElementById('transaction-table-body');
-
-              // Iterate through each transaction in the data
-              data.forEach((transaction, index) => {
-                  // Create a table row
-                  const row = document.createElement('tr');
-
-                  // Create table data cells and populate them with transaction information
-                  const transactionIDCell = document.createElement('td');
-                  transactionIDCell.textContent = transaction.getuid;// Assuming transaction ID is the index + 1
-                  row.appendChild(transactionIDCell);
-
-                  const dateCell = document.createElement('td');
-                  dateCell.textContent = transaction.date;
-                  row.appendChild(dateCell);
-
-                  const amountCell = document.createElement('td');
-                  amountCell.textContent = transaction.amount !== null ? '$' + transaction.amount.toFixed(2) : 'N/A';
-                  row.appendChild(amountCell);
-
-                  // Append the row to the table body
-                  tableBody.appendChild(row);
-              });
-          })
-          .catch(error => console.error('Error fetching transaction data:', error));
-  </script>
 
   <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
