@@ -281,11 +281,11 @@
               const attributes = request.attributes;
               const requestDate = attributes.createdAt ? new Date(attributes.createdAt).toLocaleDateString() : 'N/A';
               const user = attributes.userid || 'N/A';
-              const bookTitle = attributes.bookdetail?.title || 'N/A';
+              const bookTitle = attributes.bookdetail[0]?.title || 'N/A';
               const email = 'N/A'; // Update this once email field is available in the response
               const phoneNumber = 'N/A'; // Update this once phone number field is available in the response
-              const category = attributes.bookdetail?.genre || 'N/A';
-              const availabilityStatus = attributes.bookdetail?.availability ? 'Yes' : 'No';
+              const category = attributes.bookdetail[0]?.genre || 'N/A';
+              const availabilityStatus = attributes.bookdetail[0]?.availability ? 'Yes' : 'No';
         
               const listItem = document.createElement('li');
               listItem.className = 'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
