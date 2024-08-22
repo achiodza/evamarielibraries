@@ -136,7 +136,7 @@
       loader.style.display = 'block'; // Show loader
 
       fetch('http://203.161.49.218:1337/api/users/', {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Authorization': 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b',
           'Content-Type': 'application/json'
@@ -147,7 +147,6 @@
         })
       })
       .then(response => response.json())
-      
       .then(data => {
         loader.style.display = 'none'; // Hide loader
         if (data.jwt) {
