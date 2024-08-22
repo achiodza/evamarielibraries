@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
   <title>
-    Eva Marie Libraries:Login
+    Eva Marie Libraries: Login
   </title>
   <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -75,7 +75,7 @@
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" required>
+                    <input type="password" id="pwd" class="form-control" required>
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>
@@ -87,7 +87,7 @@
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
-                    <a href="../pages/sign-up.html" class="text-info text-gradient font-weight-bold">Sign up</a>
+                    <a href="#" class="text-info text-gradient font-weight-bold">Nothing to See Here!</a>
                   </p>
                 </form>
               </div>
@@ -124,21 +124,20 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+  <script src="./assets/js/material-dashboard.min.js?v=3.1.0"></script>
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+      const password = document.getElementById('pwd').value;
       const errorMessage = document.getElementById('error-message');
       const loader = document.getElementById('loader');
 
       loader.style.display = 'block'; // Show loader
 
-      fetch('http://203.161.49.218:1337/api/users/', {
+      fetch('/api/login', { // Call the server-side endpoint
         method: 'POST',
         headers: {
-          'Authorization': 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -149,8 +148,8 @@
       .then(response => response.json())
       .then(data => {
         loader.style.display = 'none'; // Hide loader
-        if (data.jwt) {
-          window.location.href = './pages/dashboard.html';
+        if (data.success && data.jwt) {
+          window.location.href = './pages/dashboard.php';
         } else {
           errorMessage.textContent = 'Login failed: ' + (data.message || 'Invalid credentials');
         }
