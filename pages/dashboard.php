@@ -230,7 +230,7 @@
                         <i class="material-icons text-lg">${buttonIcon}</i>
                       </button>
                       <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Book Name: <span>${book.attributes.bookdetail.title}</span></h6>
+                        <h6 class="mb-1 text-dark text-sm">Book Name: <span>${book.attributes.bookdetail[0].title}</span></h6>
                         <span>Borrowed By: ${book.attributes.userid}</span>
                         <span>Date and Time: ${new Date(book.attributes.createdAt).toLocaleString()}</span>
                       </div>
