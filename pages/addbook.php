@@ -159,7 +159,7 @@
           const uploadResponse = await fetch('http://203.161.49.218:1337/api/upload', {
               method: 'POST',
               headers: {
-                  'Authorization': 'fa202df8776a58179bb222a33562c69723749e7179de4e83331ab624cce077160c9ab6cac885de1447d11e24dbae3ff9b6743831ba1bd0acbeb3a5c76665107b6c9552d897a7b96f18d19f6932f7d4961d9953211549234e84c211ea89a1209744936ddf65c08b4b68299efeabe20c0e63eb94c700867063543f939f8e3afa30'
+                  'Authorization': '21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de'
               },
               body: formData
           });
@@ -192,7 +192,7 @@
           const bookResponse = await fetch('http://203.161.49.218:1337/api/books-metas/', {
               method: 'POST',
               headers: {
-                  'Authorization': '54afcf2adc076c68aec973bb9af9f40e2a636e8cb4dea8d1587ee653a13e3dff7c0a80dc640a506f951eab03413f161d8f9fea6cb0122bb3974fa5eb6536be36060f73e05405266e4bfaf10f20943b272ae0a723de57f1b6894b71eba26a1d45e32ca15e085cb28fa9967d3782ac006469a6aca7434bba33c8933a004070cab2',
+                  'Authorization': '8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify(bookData)
