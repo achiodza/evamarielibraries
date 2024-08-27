@@ -68,7 +68,7 @@
                         });
                         const data = await response.json();
                         const lastBook = data.data[data.data.length - 1];
-                        const lastBookTitle = lastBook.attributes.bookdetail.title;
+                        const lastBookTitle = lastBook.attributes.bookdetail[0].title;
         
                         document.getElementById('last-book-title').textContent = lastBookTitle;
                     } catch (error) {
