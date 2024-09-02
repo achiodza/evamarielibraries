@@ -86,7 +86,7 @@
             
             // Initial call to display the clock immediately
             updateClock();
-            </script>
+          </script>
           <ul class="navbar-nav  justify-content-end">
           
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

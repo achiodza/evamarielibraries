@@ -301,7 +301,6 @@
                   <span class="text-xs">Availability: <span class="text-dark ms-sm-2 font-weight-bold">${availabilityStatus}</span></span>
                 </div>
                 <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Decline</a>
                   <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Approve</a>
                 </div>
               `;
