@@ -198,22 +198,28 @@
               }
           };
 
-          const bookResponse = await fetch('http://203.161.49.218:1337/api/books-metas/', {
-              method: 'POST',
-              headers: {
-                  'Authorization': '21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de',  // Replace with a valid token
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(bookData)
-          });
+          console.log('Attempting to upload book data:', bookData);
 
-          if (bookResponse.ok) {
-              alert('Book data submitted successfully!');
-              form.reset();
-          } else {
-              const errorData = await bookResponse.json();
-              alert('Error submitting data: ' + (errorData.message || JSON.stringify(errorData)));
-          }
+const bookResponse = await fetch('http://203.161.49.218:1337/api/books-metas/', {
+    method: 'POST',
+    headers: {
+        'Authorization': '21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bookData)
+});
+
+console.log('Book submission response:', bookResponse);
+
+if (bookResponse.ok) {
+    alert('Book data submitted successfully!');
+    form.reset();
+} else {
+    const errorData = await bookResponse.json();
+    console.error('Book submission error response:', errorData);
+    alert('Error submitting data: ' + (errorData.message || JSON.stringify(errorData)));
+
+
       } catch (error) {
           console.error('Error submitting data:', error);  // Log entire error
           alert('Error submitting data: ' + error.message);
