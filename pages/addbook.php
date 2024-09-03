@@ -220,10 +220,7 @@ if (bookResponse.ok) {
     alert('Error submitting data: ' + (errorData.message || JSON.stringify(errorData)));
 
 
-      } catch (error) {
-          console.error('Error submitting data:', error);  // Log entire error
-          alert('Error submitting data: ' + error.message);
-      }
+      } 
   });
 
   function sanitize(input) {
