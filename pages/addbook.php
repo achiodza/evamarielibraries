@@ -183,7 +183,7 @@
           const uploadedImageId = uploadResult[0].id;
 
           const bookData = {
-              data: {
+              "data": {
                   title: title,
                   author: author,
                   description: description,
