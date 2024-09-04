@@ -22,7 +22,7 @@
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <style>
-    body {
+    /* body {
         font-family: Arial, sans-serif;
         margin: 20px;
     }
@@ -37,20 +37,7 @@
         border-collapse: collapse;
         table-layout: fixed;
     }
-    th, td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: text-wrap;
-    }
-    th {
-        background-color: #f4f4f4;
-    }
-    td.description {
-        max-width: 300px; /* Adjust as necessary */
-    }
+    
     .table-responsive {
         overflow-x: auto;
     }
@@ -58,7 +45,7 @@
         width: 100%;
         box-sizing: border-box;
         padding: 5px;
-    }
+    } */
 </style>
 </head>
 
