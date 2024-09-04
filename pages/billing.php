@@ -20,9 +20,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -52,132 +50,21 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Book Name & Author</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Borrower</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Return Date</th>
-                          <th class="text-secondary opacity-7"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Last Juror</h6>
-                                <p class="text-xs text-secondary mb-0">John Grisham</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Leo Gabriel</p>
-                            <p class="text-xs text-secondary mb-0">User</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Borrowed</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                          </td>
-                          <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              Edit
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">The 300</h6>
-                                <p class="text-xs text-secondary mb-0">Zack Snyder</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Moses June</p>
-                            <p class="text-xs text-secondary mb-0">User</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">Returned</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                          </td>
-                          <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              Edit
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">King of Torts</h6>
-                                <p class="text-xs text-secondary mb-0">Lindsay Graham</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Jean Grey</p>
-                            <p class="text-xs text-secondary mb-0">User</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Borrowed</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                          </td>
-                          <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              Edit
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Harry Potter and The Goblet of Fire</h6>
-                                <p class="text-xs text-secondary mb-0">J.K Rowling</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Esther Chiodza</p>
-                            <p class="text-xs text-secondary mb-0">User</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Returned</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                          </td>
-                          <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              Edit
-                            </a>
-                          </td>
-                        </tr>
-                      
-                      </tbody>
-                    </table>
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Book Name & Author</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Borrower</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Return Date</th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="borrowedBooksTable">
+                      <!-- Rows will be dynamically inserted here -->
+                    </tbody>
+                  </table>
+
                   </div>
                 </div>
               </div>
@@ -186,6 +73,69 @@
         </div>
    
       </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const tableBody = document.getElementById('borrowedBooksTable');
+
+            try {
+                const response = await fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
+                    headers: {
+                        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch borrowed books');
+                }
+
+                const data = await response.json();
+                const books = data.data;
+
+                books.forEach(book => {
+                    const bookDetails = book.attributes.bookdetail[0];
+                    const borrower = book.attributes.userid;
+
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div>
+                                    <img src="${bookDetails.coverImage || '../assets/img/default-cover.jpg'}" class="avatar avatar-sm me-3 border-radius-lg" alt="${bookDetails.title}">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">${bookDetails.title}</h6>
+                                    <p class="text-xs text-secondary mb-0">${bookDetails.author}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">${borrower}</p>
+                            <p class="text-xs text-secondary mb-0">User</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success">${bookDetails.availability ? 'Borrowed' : 'Returned'}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
+                        </td>
+                        <td class="align-middle">
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                Edit
+                            </a>
+                        </td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                tableBody.innerHTML = '<tr><td colspan="5">Failed to load borrowed books.</td></tr>';
+            }
+        });
+    </script>
   
       <footer class="footer py-4  ">
         <div class="container-fluid">
@@ -195,9 +145,7 @@
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
-                Made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Infinity Lines of Code</a>
-                for a better web.
+               
               </div>
             </div>
             <div class="col-lg-6">
