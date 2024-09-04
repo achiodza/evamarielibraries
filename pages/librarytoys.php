@@ -39,14 +39,7 @@
         border-collapse: collapse;
         table-layout: fixed;
     }
-    th, td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: text-wrap;
-    }
+ 
     th {
         background-color: #f4f4f4;
     }
