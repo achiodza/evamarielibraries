@@ -94,9 +94,9 @@
                                 <input type="file" id="coverImage" name="coverImage" class="form-control" required>
                             </div>
                               <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Availability:</label>
+                                  <label class="form-label"></label>
                                   <select id="availability" name="availability" class="form-control" required>
-                                    <option value=""></option>
+                                    <option value="">Select Availability</option>
                                     <option value="true">Available</option>
                                     <option value="false">Not Available</option>
                                   </select>
