@@ -22,30 +22,25 @@
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <style>
-    /* body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    .container-fluid {
-        padding: 20px;
-    }
-    .card {
-        margin-bottom: 20px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
+    .table {
         table-layout: fixed;
+        width: 100%;
     }
     
-    .table-responsive {
-        overflow-x: auto;
+    .table th, .table td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
-    input[type="text"] {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 5px;
-    } */
+    
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 40%; /* Adjust width as needed */
+    }
+    
+    .table th, .table td {
+        padding: 10px;
+        vertical-align: top;
+    }
 </style>
 </head>
 
@@ -86,13 +81,13 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Availability</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                         </tr>
-                                        <!-- <tr>
+                                        <tr>
                                             <th><input type="text" id="filter-title-author" placeholder="Filter by title or author"></th>
                                             <th><input type="text" id="filter-description" placeholder="Filter by description"></th>
                                             <th><input type="text" id="filter-genre" placeholder="Filter by genre"></th>
                                             <th><input type="text" id="filter-availability" placeholder="Filter by availability"></th>
                                             <th></th>
-                                        </tr> -->
+                                        </tr>
                                     </thead>
                                     <tbody id="book-table-body">
                                         <!-- Book information will be populated here -->
