@@ -21,8 +21,24 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <style>
+        /* Simple loader styles */
+        #loader {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -113,6 +129,7 @@
                                   <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
                               </div>
                           </form>
+                          <div id="loader"></div>
                           </div>
                     </div>
                 </div>
@@ -137,17 +154,25 @@
         document.getElementById('bookForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
+            // Show the loader
+            document.getElementById('loader').style.display = 'block';
+
+            // Disable the submit button to prevent multiple submissions
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+
             // Get form data
             const formData = new FormData();
             formData.append('files', document.getElementById('coverImage').files[0]);
 
-            // Upload image
             let coverImageId;
+
             try {
+                // Upload image
                 const imageResponse = await fetch('http://203.161.49.218:1337/api/upload', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer 21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de',
+                        'Authorization': 'Bearer YOUR_IMAGE_UPLOAD_API_TOKEN_HERE',
                     },
                     body: formData
                 });
@@ -157,33 +182,28 @@
                 }
 
                 const imageData = await imageResponse.json();
-                coverImageId = imageData[0].id;  // Assuming that the upload API returns an array with image details
-            } catch (error) {
-                console.error('Error uploading image:', error);
-                return;
-            }
+                coverImageId = imageData[0].id;
 
-            // Prepare book data
-            const bookData = {
-                title: document.getElementById('title').value,
-                author: document.getElementById('author').value,
-                description: document.getElementById('description').value,
-                availability: document.getElementById('availability').value === 'true',
-                coverImage: coverImageId,
-                genre: document.getElementById('genre').value,
-                language: document.getElementById('language').value,
-                pages: document.getElementById('pages').value,
-                publicationDate: document.getElementById('publicationDate').value,
-                rating: document.getElementById('rating').value,
-                timesBorrowed: document.getElementById('timesBorrowed').value
-            };
+                // Prepare book data
+                const bookData = {
+                    title: document.getElementById('title').value,
+                    author: document.getElementById('author').value,
+                    description: document.getElementById('description').value,
+                    availability: document.getElementById('availability').value === 'true',
+                    coverImage: coverImageId,
+                    genre: document.getElementById('genre').value,
+                    language: document.getElementById('language').value,
+                    pages: document.getElementById('pages').value,
+                    publicationDate: document.getElementById('publicationDate').value,
+                    rating: document.getElementById('rating').value,
+                    timesBorrowed: document.getElementById('timesBorrowed').value
+                };
 
-            // Send book data
-            try {
+                // Send book data
                 const bookResponse = await fetch('http://203.161.49.218:1337/api/books-metas/', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+                        'Authorization': 'Bearer YOUR_BOOK_META_API_TOKEN_HERE',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ data: bookData })
@@ -193,15 +213,20 @@
                     throw new Error('Book meta submission failed');
                 }
 
-                const bookResponseData = await bookResponse.json();
-                console.log('Book meta submitted successfully:', bookResponseData);
+                // Success: Clear the form and provide feedback
+                document.getElementById('bookForm').reset();
+                alert('Book submitted successfully!');
+
             } catch (error) {
-                console.error('Error submitting book meta:', error);
+                console.error('Error submitting the form:', error);
+                alert('There was an error submitting the form.');
+            } finally {
+                // Hide the loader and re-enable the submit button
+                document.getElementById('loader').style.display = 'none';
+                submitButton.disabled = false;
             }
         });
     </script>
-
-
 
 
 
