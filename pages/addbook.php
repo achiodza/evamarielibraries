@@ -117,10 +117,11 @@
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <div class="input-group input-group-outline">
-                    <label class="form-label">Rating:</label>
-                    <input type="number" step="0.1" id="rating" name="rating" class="form-control" required>
-                </div>
+            <div class="input-group input-group-outline">
+                <label class="form-label">Rating:</label>
+                <input type="number" step="0.1" id="rating" name="rating" class="form-control" required min="0" max="5">
+            </div>
+
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
@@ -156,6 +157,14 @@
                     </select>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Book ID:</label>
+                    <input type="text" id="isbn" name="isbn" class="form-control" required>
+                </div>
+            </div>
+
         </div>
         <div id="loader"></div>
 
@@ -233,6 +242,7 @@
                     publicationDate: document.getElementById('publicationDate').value,
                     rating: document.getElementById('rating').value,
                     timesBorrowed: document.getElementById('timesBorrowed').value
+                    isbn: document.getElementById('isbn').value
                 };
 
                 // Send book data
