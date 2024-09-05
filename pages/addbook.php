@@ -57,13 +57,6 @@
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   
-
- 
-  
-
-
-
-  <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
     <div class="row">
         <div class="col-lg-12">
@@ -140,13 +133,13 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Description:</label>
+                    <label class="form-label"></label>
                     <textarea placeholder="Description" id="description" name="description" class="form-control" required></textarea>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Cover Image:</label>
+                    <label class="form-label"></label>
                     <input type="file" id="coverImage" name="coverImage" class="form-control" required>
                 </div>
             </div>
