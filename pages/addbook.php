@@ -75,62 +75,105 @@
                                 <h6 class="text-white text-capitalize ps-3">Submit Book Data</h6>
                             </div>
                         </div>
-                        <div class="card-body w-50">
-                          <form id="bookForm" class="text-start">
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Title:</label>
-                                  <input type="text" id="title" name="title" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Author:</label>
-                                  <input type="text" id="author" name="author" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label"></label>
-                                  <textarea placeholder="Description" id="description" name="description" class="form-control" required></textarea>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                <label class="form-label"></label>
-                                <input type="file" id="coverImage" name="coverImage" class="form-control" required>
-                            </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label"></label>
-                                  <select id="availability" name="availability" class="form-control" required>
-                                    <option value="">Select Availability</option>
-                                    <option value="true">Available</option>
-                                    <option value="false">Not Available</option>
-                                  </select>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Genre:</label>
-                                  <input type="text" id="genre" name="genre" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Language:</label>
-                                  <input type="text" id="language" name="language" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Pages:</label>
-                                  <input type="number" id="pages" name="pages" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Publication Date:</label>
-                                  <input type="text" id="publicationDate" name="publicationDate" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Rating:</label>
-                                  <input type="number" step="0.1" id="rating" name="rating" class="form-control" required>
-                              </div>
-                              <div class="input-group input-group-outline mb-3">
-                                  <label class="form-label">Times Borrowed:</label>
-                                  <input type="number" id="timesBorrowed" name="timesBorrowed" class="form-control" required>
-                              </div>
-                              <div class="text-center">
-                                  <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
-                              </div>
-                          </form>
-                          <div id="loader"></div>
-                          </div>
+                        <div class="card-body">
+    <form id="bookForm" class="text-start">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Title:</label>
+                    <input type="text" id="title" name="title" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Author:</label>
+                    <input type="text" id="author" name="author" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Genre:</label>
+                    <input type="text" id="genre" name="genre" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Language:</label>
+                    <input type="text" id="language" name="language" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Pages:</label>
+                    <input type="number" id="pages" name="pages" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Publication Date:</label>
+                    <input type="text" id="publicationDate" name="publicationDate" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Rating:</label>
+                    <input type="number" step="0.1" id="rating" name="rating" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Times Borrowed:</label>
+                    <input type="number" id="timesBorrowed" name="timesBorrowed" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Description:</label>
+                    <textarea placeholder="Description" id="description" name="description" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Cover Image:</label>
+                    <input type="file" id="coverImage" name="coverImage" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="input-group input-group-outline">
+                    <label class="form-label"></label>
+                    <select id="availability" name="availability" class="form-control" required>
+                        <option value="">Select Availability</option>
+                        <option value="true">Available</option>
+                        <option value="false">Not Available</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="loader"></div>
+
+        <div class="text-center">
+            <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
+        </div>
+    </form>
+    
+</div>
+
+                      
                     </div>
                 </div>
             </div>
