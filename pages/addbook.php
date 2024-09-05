@@ -241,7 +241,7 @@
                     pages: document.getElementById('pages').value,
                     publicationDate: document.getElementById('publicationDate').value,
                     rating: document.getElementById('rating').value,
-                    timesBorrowed: document.getElementById('timesBorrowed').value
+                    timesBorrowed: document.getElementById('timesBorrowed').value,
                     isbn: document.getElementById('isbn').value
                 };
 
