@@ -124,7 +124,7 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Times Borrowed:</label>
+                    <label class="form-label">Number of Books Present:</label>
                     <input type="number" id="timesBorrowed" name="timesBorrowed" class="form-control" required>
                 </div>
             </div>
