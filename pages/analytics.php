@@ -60,7 +60,7 @@
                 <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
                 <h6 class="mb-0">List of Users In the Our Database</h6>
                 <div class="col-6 text-end">
-                  <a class="btn bg-gradient-dark mb-0" href="javascript:;" id="download-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
+                  <a class="btn bg-gradient-dark mb-0" id="download-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
                   </div>
                 </div>
                 </div>
