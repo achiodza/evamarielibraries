@@ -41,7 +41,7 @@
   <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-11">
             <div class="row">
               <div class="card mt-4">
                 <div class="card-header pb-0 p-3">
