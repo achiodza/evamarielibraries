@@ -66,7 +66,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-info shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Library Books Listing</h6>
+                                <h6 class="text-white text-capitalize ps-3">Our Users Database</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -82,11 +82,11 @@
                         <th>Actions</th>
                     </tr>
                     <tr>
-                        <th><input type="text" id="filter-username" placeholder="Filter by username"></th>
-                        <th><input type="text" id="filter-email" placeholder="Filter by email"></th>
-                        <th><input type="text" id="filter-phone" placeholder="Filter by phone number"></th>
-                        <th><input type="text" id="filter-nextofkin" placeholder="Filter by next of kin"></th>
-                        <th><input type="text" id="filter-location" placeholder="Filter by location"></th>
+                        <th><input type="text" class="form-control" id="filter-username" placeholder="Filter by username"></th>
+                        <th><input type="text" class="form-control" id="filter-email" placeholder="Filter by email"></th>
+                        <th><input type="text" class="form-control" id="filter-phone" placeholder="Filter by phone number"></th>
+                        <th><input type="text" class="form-control" id="filter-nextofkin" placeholder="Filter by next of kin"></th>
+                        <th><input type="text" class="form-control" id="filter-location" placeholder="Filter by location"></th>
                         <th></th>
                     </tr>
                 </thead>
