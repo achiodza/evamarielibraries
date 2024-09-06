@@ -77,7 +77,7 @@
                   Warning: Deleting your account will remove all your data from our system. This action is irreversible.
                 </div>
                 <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Reason for Deleting (Optional):</label>
+                  <label class="form-label"></label>
                   <textarea placeholder="Please share your reason..." id="reason" name="reason" class="form-control"></textarea>
                 </div>
                 <div class="input-group input-group-outline mb-3">
