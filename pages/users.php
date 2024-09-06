@@ -163,7 +163,7 @@
                     <td>${user.phoneNo || 'N/A'}</td>
                     <td>${user.nextOfKin || 'N/A'}</td>
                     <td>${user.location || 'N/A'}</td>
-                    <td><button class="btn btn-primary"><a href="./delete-account.php">Edit</a></button></td>
+                    <td><button class="btn btn-secondary"><a href="./delete-account.php">Edit</a></button></td>
                 `;
                 tbody.appendChild(row);
             }
