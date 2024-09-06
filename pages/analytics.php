@@ -81,16 +81,16 @@
         </div>
     </div>
     <script>
-        const apiUrl = 'http://203.161.49.218:1337/api/borrowedbooks?populate=*';  // Strapi API endpoint
-        const authToken = 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
+        const apiUrll = 'http://203.161.49.218:1337/api/borrowedbooks?populate=*';  // Strapi API endpoint
+        const authTokenn = 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
 
         // Function to fetch borrowed books data from Strapi API
         async function fetchBorrowedBooks() {
             try {
-                const response = await fetch(apiUrl, {
+                const response = await fetch(apiUrll, {
                     method: 'GET',
                     headers: {
-                        'Authorization': authToken
+                        'Authorization': authTokenn
                     }
                 });
                 const data = await response.json();
