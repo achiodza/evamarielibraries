@@ -40,16 +40,16 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account Management</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../index.php">
+          <a class="nav-link text-white " href="../pages/users.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">user</i>
+              <i class="material-icons opacity-10">home</i>
             </div>
             <span class="nav-link-text ms-1">Platform Users</span>
           </a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/users.php">
+          <a class="nav-link text-white " href="../index.hp">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>

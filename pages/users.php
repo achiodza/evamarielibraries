@@ -22,25 +22,7 @@
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <style>
-    .table {
-        table-layout: fixed;
-        width: 100%;
-    }
-    
-    .table th, .table td {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-    }
-    
-    .table th:nth-child(2), .table td:nth-child(2) {
-        width: 40%; /* Adjust width as needed */
-    }
-    
-    .table th, .table td {
-        padding: 10px;
-        vertical-align: top;
-    }
+   
     .pagination {
             margin-top: 20px;
             display: flex;
