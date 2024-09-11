@@ -44,7 +44,7 @@
               <div class="row">
                 <h6 class="mb-0">Users Data Information</h6>
                 <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Users Data Information</h6>
+                  
                 </div>
               </div>
             </div>
@@ -98,9 +98,9 @@
                 <div class="col-md-6">
                   <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                     <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Toys</h6>
+                    <h6 class="mb-0">List of Toys (Coming Soon)</h6>
                     <div class="col-6 text-end">
-                      <p>Coming Soon</p>
+                    
                       <a class="btn bg-gradient-dark mb-0"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
                     </div>
                   </div>
