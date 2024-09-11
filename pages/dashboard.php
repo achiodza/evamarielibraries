@@ -245,7 +245,7 @@
         <script>
         
         let currentPage = 0;
-const itemsPerPage = 10;
+const itemsPerPage = 5;
 
 function loadRequests(page = 0) {
   const offset = page * itemsPerPage;
