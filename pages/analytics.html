@@ -22,7 +22,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+  <!-- <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="" target="_blank">
@@ -32,19 +32,21 @@
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <?php include './includes/navheader.php'; ?>
-  </aside>
+  </aside> -->
 
   <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
     <div class="row">
       <div class="col-lg-11">
         <div class="row">
+          <h6 class="mb-0">Users Data Information</h6>
+          <p>You can download Excel Files of the data stored in your database of the users you have and also the books borrowed. This information can further be analysed on areas/location of most users or books borrowed.</p>
           <div class="card mt-4">
             <div class="card-header pb-0 p-3">
               <div class="row">
-                <h6 class="mb-0">Users Data Information</h6>
+                
                 <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Users Data Information</h6>
+                  
                 </div>
               </div>
             </div>
@@ -76,11 +78,13 @@
 
       <div class="col-lg-11">
         <div class="row">
+          <h6 class="mb-0">Books Information and Records</h6>
           <div class="card mt-4">
             <div class="card-header pb-0 p-3">
               <div class="row">
+               
                 <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Library Data Information</h6>
+                  
                 </div>
               </div>
             </div>
@@ -89,19 +93,18 @@
                 <div class="col-md-6 mb-md-0 mb-4">
                   <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                     <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Books In Database</h6>
+                    <h6 class="mb-0">List of Users In Our Database</h6>
                     <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" id="downloadBtn"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
+                      <a class="btn bg-gradient-dark mb-0" id="download-excel"><i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                     <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Toys</h6>
+                    <h6 class="mb-0">List of Borrowed Books Against Users</h6>
                     <div class="col-6 text-end">
-                      <p>Coming Soon</p>
-                      <a class="btn bg-gradient-dark mb-0"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
+                      <a class="btn bg-gradient-dark mb-0" id="download-borrowedbooks-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
                     </div>
                   </div>
                 </div>
@@ -193,52 +196,6 @@
         </div>
     </footer>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-      // Fetch the data from the API
-      axios.get('http://203.161.49.218:1337/api/books-metas/', {
-        headers: {
-          'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        const booksMeta = response.data.data;
-
-        // Convert the booksMeta data into a format suitable for Excel
-        const excelData = booksMeta.map(book => ({
-          ID: book.id,
-          Title: book.attributes.title,
-          Author: book.attributes.author,
-          Genre: book.attributes.genre,
-          ISBN: book.attributes.isbn,
-          Language: book.attributes.language,
-          Pages: book.attributes.pages,
-          PublicationDate: book.attributes.publicationDate,
-          Availability: book.attributes.availability ? "Available" : "Not Available",
-          Rating: book.attributes.rating,
-          Description: book.attributes.description,
-          CreatedAt: new Date(book.attributes.createdAt).toLocaleDateString(),
-          UpdatedAt: new Date(book.attributes.updatedAt).toLocaleDateString(),
-        }));
-
-        // Create a new worksheet
-        const worksheet = XLSX.utils.json_to_sheet(excelData);
-
-        // Create a new workbook
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Books Meta");
-
-        // Export the workbook as an Excel file
-        XLSX.writeFile(workbook, 'Books_Meta.xlsx');
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-    });
-  </script>
 <script>
   const apiUrl = 'http://203.161.49.218:1337/api/users';  // Strapi API endpoint
   const authToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';

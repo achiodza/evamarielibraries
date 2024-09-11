@@ -241,46 +241,42 @@
             </div>
           </div>
         </div>
-
-        <script>
         
-        let currentPage = 0;
-const itemsPerPage = 10;
-
-function loadRequests(page = 0) {
-  const offset = page * itemsPerPage;
-
-  fetch(`http://203.161.49.218:1337/api/borrowedbooks?populate=*&_start=${offset}&_limit=${itemsPerPage}`, {
+        <script>
+  // Fetch book details from the endpoint
+  fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
     headers: {
-      'Authorization': 'Bearer YOUR_TOKEN',
+      'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
       'Content-Type': 'application/json'
     }
   })
   .then(response => response.json())
   .then(data => {
-    const requests = data.data; 
-    const requestQueue = document.getElementById('request-queue');
+    console.log(data);  // Log the data to check its structure
 
-    // Clear the previous list before adding new records
-    requestQueue.innerHTML = '';
+    const requests = data.data; // Access the array of requests
+    const requestQueue = document.getElementById('request-queue');
 
     requests.forEach(request => {
       const attributes = request.attributes;
       const requestDate = attributes.createdAt ? new Date(attributes.createdAt).toLocaleDateString() : 'N/A';
       const user = attributes.userid || 'N/A';
       const bookTitle = attributes.bookdetail[0]?.title || 'N/A';
-      const phoneNumber = attributes.phoneNo || 'N/A';
+      const email = 'N/A'; // Update this once email field is available in the response
+      const phoneNumber = attributes.phoneNo; // Update this once phone number field is available in the response
       const category = attributes.bookdetail[0]?.genre || 'N/A';
       const availabilityStatus = attributes.bookdetail[0]?.availability ? 'Yes' : 'No';
 
+      // Only show books that are available
       if (availabilityStatus === 'Yes') {
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
 
         listItem.innerHTML = `
           <div class="d-flex flex-column">
-            <h6 class="mb-3 text-sm">${bookTitle}</h6>
+            <h6 class="mb-3 text-sm">${bookTitle}</h6> <!-- Book Name -->
             <span class="mb-2 text-xs">Requested By: <span class="text-dark font-weight-bold ms-sm-2">${user}</span></span>
+            <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">${email}</span></span>
             <span class="mb-2 text-xs">Phone Number: <span class="text-dark ms-sm-2 font-weight-bold">${phoneNumber}</span></span>
             <span class="mb-2 text-xs">Book Category: <span class="text-dark ms-sm-2 font-weight-bold">${category}</span></span>
             <span class="mb-2 text-xs">Date Requested: <span class="text-dark ms-sm-2 font-weight-bold">${requestDate}</span></span>
@@ -290,18 +286,12 @@ function loadRequests(page = 0) {
             <a class="btn btn-link text-dark px-3 mb-0 approve-btn" href="javascript:;" data-book-id="${attributes.bookdetail[0].id}"><i class="material-icons text-sm me-2">edit</i>Approve</a>
           </div>
         `;
+
         requestQueue.appendChild(listItem);
       }
     });
 
-    // Add pagination controls
-    const pagination = document.getElementById('pagination-controls');
-    pagination.innerHTML = `
-      <button ${currentPage === 0 ? 'disabled' : ''} onclick="loadRequests(${currentPage - 1})">Previous</button>
-      <button ${requests.length < itemsPerPage ? 'disabled' : ''} onclick="loadRequests(${currentPage + 1})">Next</button>
-    `;
-
-    // Event listeners for Approve buttons
+    // Add event listener to all Approve buttons
     document.querySelectorAll('.approve-btn').forEach(button => {
       button.addEventListener('click', function() {
         const bookId = this.getAttribute('data-book-id');
@@ -310,34 +300,31 @@ function loadRequests(page = 0) {
     });
   })
   .catch(error => console.error('Error fetching book requests:', error));
-}
 
-// Initial load
-loadRequests();
-
-function updateBookAvailability(bookId, button) {
-  fetch(`http://203.161.49.218:1337/api/bookmetas/${bookId}`, {
-    method: 'PATCH', // Changed from PUT to PATCH
-    headers: {
-      'Authorization': 'Bearer YOUR_TOKEN',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      data: {
-        availability: false
-      }
+  // Function to update book availability to "No"
+  function updateBookAvailability(bookId, button) {
+    fetch(`http://203.161.49.218:1337/api/bookmetas/${bookId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: {
+          availability: false
+        }
+      })
     })
-  })
-  .then(response => response.json())
-  .then(updatedBook => {
-    console.log('Book updated:', updatedBook);
+    .then(response => response.json())
+    .then(updatedBook => {
+      console.log('Book updated:', updatedBook);
 
-    // Remove the approved book from the list
-    const listItem = button.closest('li');
-    listItem.remove();
-  })
-  .catch(error => console.error('Error updating book availability:', error));
-}
+      // Remove the approved book from the list
+      const listItem = button.closest('li');
+      listItem.remove();
+    })
+    .catch(error => console.error('Error updating book availability:', error));
+  }
 </script>
 
         
