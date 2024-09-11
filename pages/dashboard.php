@@ -167,7 +167,7 @@
                   <h6 class="mb-0">Recent Books History</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
-                  <i class="material-icons me-2 text-lg">date_range</i>
+                  <!-- <i class="material-icons me-2 text-lg">date_range</i> -->
                   
                 </div>
               </div>
