@@ -114,6 +114,7 @@
         <label class="form-label">Release Date:</label>
         <input type="text" id="releaseDate" name="releaseDate" class="form-control" required>
     </div>
+    <div id="loader"></div>
     <div class="text-center">
         <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
     </div>
