@@ -20,7 +20,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-  
+  <style>
+        /* Simple loader styles */
+        #loader {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -88,7 +105,7 @@
         </select>
     </div>
 
-    <div class="input-group input-group-outline">
+    <div class="input-group input-group-outline mb-3">
         <label class="form-label"></label>
         <input type="file" id="coverImage" name="coverImage" class="form-control" required>
     </div>
