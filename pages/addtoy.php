@@ -87,6 +87,12 @@
             <option value="false">Out of Stock</option>
         </select>
     </div>
+
+    <div class="input-group input-group-outline">
+        <label class="form-label"></label>
+        <input type="file" id="coverImage" name="coverImage" class="form-control" required>
+    </div>
+
     <div class="input-group input-group-outline mb-3">
         <label class="form-label">Release Date:</label>
         <input type="text" id="releaseDate" name="releaseDate" class="form-control" required>
@@ -121,23 +127,49 @@
   document.getElementById('toyForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
+    // Show the loader
+    document.getElementById('loader').style.display = 'block';
+
     // Disable the submit button to prevent multiple submissions
     const submitButton = event.target.querySelector('button[type="submit"]');
     submitButton.disabled = true;
 
     // Get form data
-    const toyData = {
-        name: document.getElementById('name').value,
-        description: document.getElementById('description').value,
-        type: document.getElementById('type').value,
-        price: document.getElementById('price').value,
-        manufacturer: document.getElementById('manufacturer').value,
-        ageRange: document.getElementById('ageRange').value,
-        isInStock: document.getElementById('isInStock').value === 'true',
-        releaseDate: document.getElementById('releaseDate').value
-    };
+    const formData = new FormData();
+    formData.append('files', document.getElementById('toyImage').files[0]); // Add image file to formData
+
+    let toyImageId;
 
     try {
+        // Upload image
+        const imageResponse = await fetch('http://203.161.49.218:1337/api/upload', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer 21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de',
+            },
+            body: formData
+        });
+
+        if (!imageResponse.ok) {
+            throw new Error('Image upload failed');
+        }
+
+        const imageData = await imageResponse.json();
+        toyImageId = imageData[0].id;
+
+        // Prepare toy data
+        const toyData = {
+            name: document.getElementById('name').value,
+            description: document.getElementById('description').value,
+            type: document.getElementById('type').value,
+            price: document.getElementById('price').value,
+            manufacturer: document.getElementById('manufacturer').value,
+            ageRange: document.getElementById('ageRange').value,
+            isInStock: document.getElementById('isInStock').value === 'true',
+            releaseDate: document.getElementById('releaseDate').value,
+            toyImage: toyImageId // Include the uploaded image ID
+        };
+
         // Send toy data
         const response = await fetch('http://203.161.49.218:1337/api/toymetas/', {
             method: 'POST',
@@ -160,12 +192,13 @@
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
     } finally {
-        // Re-enable the submit button
+        // Hide the loader and re-enable the submit button
+        document.getElementById('loader').style.display = 'none';
         submitButton.disabled = false;
     }
 });
-
 </script>
+
 
   </main>
   
