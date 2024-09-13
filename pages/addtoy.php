@@ -70,7 +70,7 @@
                                 <h6 class="text-white text-capitalize ps-3">Submit Toy Data</h6>
                             </div>
                         </div>
-                        <div class="card-body w-50">
+                        <div class="card-body w-100">
                            <form id="toyForm" class="text-start">
                                 <div class="row">
                                     <!-- Left column -->
@@ -148,7 +148,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label">Upload Toy Image:</label>
+                                            
                                             <input type="file" id="toyImage" name="toyImage" class="form-control" required>
                                         </div>
                                     </div>
