@@ -164,7 +164,7 @@ console.log('Entered password (password):', password);
       if (user.pwd && user.pwd === password) {
         window.location.href = './pages/dashboard.php';
       } else {
-        console.log('Password comparison result:', user.pwd === password);
+        //console.log('Password comparison result:', user.pwd === password);
         errorMessage.textContent = 'Login failed: Invalid credentials';
       }
     })

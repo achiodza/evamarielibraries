@@ -283,7 +283,7 @@
             <span class="text-xs">Availability: <span class="text-dark ms-sm-2 font-weight-bold">${availabilityStatus}</span></span>
           </div>
           <div class="ms-auto text-end">
-            <a class="btn btn-link text-dark px-3 mb-0 approve-btn" href="javascript:;" data-book-id="${attributes.bookdetail[0].id}"><i class="material-icons text-sm me-2">edit</i>Approve</a>
+            <a class="btn btn-link text-dark px-3 mb-0 approve-btn" href="" data-book-id="${attributes.bookdetail[0].id}"><i class="material-icons text-sm me-2">edit</i>Approve</a>
           </div>
         `;
 
