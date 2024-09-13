@@ -107,7 +107,7 @@
 
     <div class="input-group input-group-outline mb-3">
         <label class="form-label"></label>
-        <input type="file" id="coverImage" name="coverImage" class="form-control" required>
+        <input type="file" id="toyImage" name="toyImage" class="form-control" required>
     </div>
 
     <div class="input-group input-group-outline mb-3">
