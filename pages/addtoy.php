@@ -71,54 +71,96 @@
                             </div>
                         </div>
                         <div class="card-body w-50">
-                        <form id="toyForm" class="text-start">
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Name:</label>
-        <input type="text" id="name" name="name" class="form-control" required>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label"></label>
-        <textarea placeholder="Description" id="description" name="description" class="form-control" required></textarea>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Type:</label>
-        <input type="text" id="type" name="type" class="form-control" required>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Price:</label>
-        <input type="number" id="price" name="price" class="form-control" required>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Manufacturer:</label>
-        <input type="text" id="manufacturer" name="manufacturer" class="form-control" required>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Age Range:</label>
-        <input type="number" id="ageRange" name="ageRange" class="form-control" required>
-    </div>
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label"></label>
-        <select id="isInStock" name="isInStock" class="form-control" required>
-            <option value="">Select Availability Status</option>
-            <option value="true">In Stock</option>
-            <option value="false">Out of Stock</option>
-        </select>
-    </div>
+                           <form id="toyForm" class="text-start">
+                                <div class="row">
+                                    <!-- Left column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Name:</label>
+                                            <input type="text" id="name" name="name" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!-- Right column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Type:</label>
+                                            <input type="text" id="type" name="type" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
 
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label"></label>
-        <input type="file" id="toyImage" name="toyImage" class="form-control" required>
-    </div>
+                                <div class="row">
+                                    <!-- Left column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Price:</label>
+                                            <input type="number" id="price" name="price" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!-- Right column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Manufacturer:</label>
+                                            <input type="text" id="manufacturer" name="manufacturer" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
 
-    <div class="input-group input-group-outline mb-3">
-        <label class="form-label">Release Date:</label>
-        <input type="text" id="releaseDate" name="releaseDate" class="form-control" required>
-    </div>
-    <div id="loader"></div>
-    <div class="text-center">
-        <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
-    </div>
-</form>
+                                <div class="row">
+                                    <!-- Left column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Age Range:</label>
+                                            <input type="number" id="ageRange" name="ageRange" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!-- Right column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <select id="isInStock" name="isInStock" class="form-control" required>
+                                                <option value="">Select Availability Status</option>
+                                                <option value="true">In Stock</option>
+                                                <option value="false">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Left column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <textarea placeholder="Description" id="description" name="description" class="form-control" required></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- Right column -->
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Release Date:</label>
+                                            <input type="text" id="releaseDate" name="releaseDate" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- File input field, full width -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Upload Toy Image:</label>
+                                            <input type="file" id="toyImage" name="toyImage" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Loader and submit button -->
+                                <div id="loader"></div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn bg-gradient-info w-50 my-4 mb-2">Submit</button>
+                                </div>
+                            </form>
+
 
                           </div>
                     </div>
@@ -185,7 +227,7 @@
             ageRange: document.getElementById('ageRange').value,
             isInStock: document.getElementById('isInStock').value === 'true',
             releaseDate: document.getElementById('releaseDate').value,
-            toyImage: toyImageId // Include the uploaded image ID
+            coverImage: toyImageId // Include the uploaded image ID
         };
 
         // Send toy data
