@@ -147,7 +147,7 @@
                         <p class="text-xs mb-0">${book.attributes.availability}</p>
                     </td>
                     <td>
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit book">
+                        <a href="./editbook.php" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit book">
                             Edit
                         </a>
                     </td>

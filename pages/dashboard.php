@@ -164,7 +164,7 @@
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-md-6">
-                  <h6 class="mb-0">Recent Books History</h6>
+                  <h6 class="mb-0">Recently Added Books</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
                   <!-- <i class="material-icons me-2 text-lg">date_range</i> -->
@@ -181,7 +181,7 @@
             
             <script>
             // Fetch book details from the endpoint
-            fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
+            fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*&_sort=createdAt:desc&_limit=5',{
               headers: {
                 'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
                 'Content-Type': 'application/json'
