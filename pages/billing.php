@@ -102,7 +102,7 @@
                         <td>
                             <div class="d-flex px-2 py-1">
                                 <div>
-                                    <img src="${bookDetails.coverImage || '../assets/img/default-cover.jpg'}" class="avatar avatar-sm me-3 border-radius-lg" alt="${bookDetails.title}">
+                                    <img src="${bookDetails.coverImage}" class="avatar avatar-sm me-3 border-radius-lg" alt="${bookDetails.title}">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="mb-0 text-sm">${bookDetails.title}</h6>
