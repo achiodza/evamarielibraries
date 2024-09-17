@@ -124,7 +124,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;  // Current page of data
-    const pageSize = 5;   // Number of items per page
+    const pageSize = 10;   // Number of items per page
 
     const fetchToysData = (page) => {
         fetch(`http://203.161.49.218:1337/api/toymetas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, {
