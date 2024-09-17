@@ -83,7 +83,7 @@
                                     <!-- Right column -->
                                     <div class="col-md-6">
                                         <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label">Type:</label>
+                                            <label class="form-label">Category:</label>
                                             <input type="text" id="type" name="type" class="form-control" required>
                                         </div>
                                     </div>
