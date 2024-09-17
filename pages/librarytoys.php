@@ -24,35 +24,24 @@
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    .container-fluid {
-        padding: 20px;
-    }
-    .card {
-        margin-bottom: 20px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
+    .table {
         table-layout: fixed;
-    }
- 
-    th {
-        background-color: #f4f4f4;
-    }
-    td.description {
-        max-width: 300px; /* Adjust as necessary */
-    }
-    .table-responsive {
-        overflow-x: auto;
-    }
-    input[type="text"] {
         width: 100%;
-        box-sizing: border-box;
-        padding: 5px;
+    }
+    
+    .table th, .table td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+    
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 40%; /* Adjust width as needed */
+    }
+    
+    .table th, .table td {
+        padding: 10px;
+        vertical-align: top;
     }
 </style>
 </head>
@@ -95,10 +84,10 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                         </tr>
                                         <tr>
-                                            <th><input type="text" id="filter-title-author" placeholder="Filter by title or author"></th>
-                                            <th><input type="text" id="filter-description" placeholder="Filter by description"></th>
-                                            <th><input type="text" id="filter-genre" placeholder="Filter by genre"></th>
-                                            <th><input type="text" id="filter-availability" placeholder="Filter by availability"></th>
+                                            <th><input type="text" class="form-control" id="filter-title-author" placeholder="Filter by title or author"></th>
+                                            <th><input type="text" class="form-control" id="filter-description" placeholder="Filter by description"></th>
+                                            <th><input type="text" class="form-control" id="filter-genre" placeholder="Filter by genre"></th>
+                                            <th><input type="text" class="form-control" id="filter-availability" placeholder="Filter by availability"></th>
                                             <th></th>
                                         </tr>
                                     </thead>
