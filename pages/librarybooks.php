@@ -93,6 +93,12 @@
                                         <!-- Book information will be populated here -->
                                     </tbody>
                                 </table>
+
+                                <div id="pagination-controls">
+                                    <button id="prev-page" disabled>Previous</button>
+                                    <span id="page-number">Page 1</span>
+                                    <button id="next-page">Next</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,7 +123,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('http://203.161.49.218:1337/api/books-metas/', {
+    let currentPage = 1;  // Current page of data
+    const pageSize = 5;   // Number of items per page
+
+    const fetchData = (page) => {
+        fetch(`http://203.161.49.218:1337/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
@@ -126,6 +136,9 @@
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('book-table-body');
+            tableBody.innerHTML = '';  // Clear existing data
+
+            // Populate the table with paginated data
             data.data.forEach(book => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -155,11 +168,32 @@
                 tableBody.appendChild(row);
             });
 
-            addFilterFunctionality();
+            // Update pagination controls
+            document.getElementById('page-number').textContent = `Page ${currentPage}`;
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
+
+            addFilterFunctionality();  // Reapply filter functionality to the new rows
         })
         .catch(error => console.error('Error:', error));
+    };
+
+    // Load the first page on page load
+    fetchData(currentPage);
+
+    // Handle pagination controls
+    document.getElementById('prev-page').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchData(currentPage);
+        }
     });
 
+    document.getElementById('next-page').addEventListener('click', () => {
+        currentPage++;
+        fetchData(currentPage);
+    });
+    
     function addFilterFunctionality() {
         document.getElementById('filter-title-author').addEventListener('input', filterTable);
         document.getElementById('filter-description').addEventListener('input', filterTable);
@@ -187,8 +221,9 @@
             }
         });
     }
-</script>
+});
 
+</script>
   
   </main>
  
