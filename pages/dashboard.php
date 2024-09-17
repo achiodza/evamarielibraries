@@ -26,7 +26,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-warning" id="sidenav-main">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
@@ -89,7 +89,7 @@
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
               <div class="card-header p-3 pt-2">
-                  <div class="icon icon-lg icon-shape bg-gradient-warningshadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                  <div class="icon icon-lg icon-shape bg-gradient-warning shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                       <i class="material-icons opacity-10">money</i>
                   </div>
                   <div class="text-end pt-1">
