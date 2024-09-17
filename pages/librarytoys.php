@@ -160,7 +160,7 @@
                         <p class="text-xs mb-0">${toy.attributes.isInStock}</p>
                     </td>
                     <td>
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Record">
+                        <a href="./edittoy.php?${toy.id}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Record">
                             Edit
                         </a>
                     </td>
