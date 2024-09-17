@@ -94,19 +94,24 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Availability</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                         </tr>
-                                        <!-- <tr>
+                                        <tr>
                                             <th><input type="text" id="filter-title-author" placeholder="Filter by title or author"></th>
                                             <th><input type="text" id="filter-description" placeholder="Filter by description"></th>
                                             <th><input type="text" id="filter-genre" placeholder="Filter by genre"></th>
                                             <th><input type="text" id="filter-availability" placeholder="Filter by availability"></th>
                                             <th></th>
-                                        </tr> -->
+                                        </tr>
                                     </thead>
                                     <tbody id="toy-table-body">
                                         <!-- toy information will be populated here -->
                                     </tbody>
                                 </table>
                             </div>
+                            <div id="pagination-controls" class="d-flex align-items-center" style="margin-left:45%">
+                                    <button id="prev-page" class="btn bg-gradient-dark mb-0" disabled>Previous</button>
+                                    <span id="page-number">Page 1</span>
+                                    <button id="next-page"class="btn bg-gradient-dark mb-0">Next</button>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +135,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('http://203.161.49.218:1337/api/toymetas/', {
+    let currentPage = 1;  // Current page of data
+    const pageSize = 5;   // Number of items per page
+
+    const fetchToysData = (page) => {
+        fetch(`http://203.161.49.218:1337/api/toymetas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
@@ -139,6 +148,9 @@
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('toy-table-body');
+            tableBody.innerHTML = '';  // Clear existing data
+
+            // Populate the table with paginated data
             data.data.forEach(toy => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -157,7 +169,7 @@
                         <p class="text-xs mb-0">${toy.attributes.ageRange}</p>
                     </td>
                     <td>
-                        <p class="text-xs mb-0">${toy.attributes.isInStock}</p>
+                        <p class="text-xs mb-0">${toy.attributes.isInStock ? 'In Stock' : 'Out of Stock'}</p>
                     </td>
                     <td>
                         <a href="./edittoy.php?${toy.id}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Record">
@@ -168,38 +180,61 @@
                 tableBody.appendChild(row);
             });
 
-            addFilterFunctionality();
+            // Update pagination controls
+            document.getElementById('page-number').textContent = `Page ${currentPage}`;
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
+
+            addFilterFunctionality();  // Reapply filter functionality to the new rows
         })
         .catch(error => console.error('Error:', error));
+    };
+
+    // Load the first page on page load
+    fetchToysData(currentPage);
+
+    // Handle pagination controls
+    document.getElementById('prev-page').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchToysData(currentPage);
+        }
     });
 
+    document.getElementById('next-page').addEventListener('click', () => {
+        currentPage++;
+        fetchToysData(currentPage);
+    });
+    
     function addFilterFunctionality() {
-        document.getElementById('filter-title-author').addEventListener('input', filterTable);
-        document.getElementById('filter-description').addEventListener('input', filterTable);
-        document.getElementById('filter-genre').addEventListener('input', filterTable);
-        document.getElementById('filter-availability').addEventListener('input', filterTable);
+        document.getElementById('filter-name-type').addEventListener('input', filterTable);
+        document.getElementById('filter-price').addEventListener('input', filterTable);
+        document.getElementById('filter-age-range').addEventListener('input', filterTable);
+        document.getElementById('filter-stock').addEventListener('input', filterTable);
     }
 
     function filterTable() {
-        const titleAuthorFilter = document.getElementById('filter-title-author').value.toLowerCase();
-        const descriptionFilter = document.getElementById('filter-description').value.toLowerCase();
-        const genreFilter = document.getElementById('filter-genre').value.toLowerCase();
-        const availabilityFilter = document.getElementById('filter-availability').value.toLowerCase();
+        const nameTypeFilter = document.getElementById('filter-name-type').value.toLowerCase();
+        const priceFilter = document.getElementById('filter-price').value.toLowerCase();
+        const ageRangeFilter = document.getElementById('filter-age-range').value.toLowerCase();
+        const stockFilter = document.getElementById('filter-stock').value.toLowerCase();
 
         const rows = document.querySelectorAll('#toy-table-body tr');
         rows.forEach(row => {
-            const titleAuthor = row.cells[0].innerText.toLowerCase();
-            const description = row.cells[1].innerText.toLowerCase();
-            const genre = row.cells[2].innerText.toLowerCase();
-            const availability = row.cells[3].innerText.toLowerCase();
+            const nameType = row.cells[0].innerText.toLowerCase();
+            const price = row.cells[1].innerText.toLowerCase();
+            const ageRange = row.cells[2].innerText.toLowerCase();
+            const stock = row.cells[3].innerText.toLowerCase();
 
-            if (titleAuthor.includes(titleAuthorFilter) && description.includes(descriptionFilter) && genre.includes(genreFilter) && availability.includes(availabilityFilter)) {
+            if (nameType.includes(nameTypeFilter) && price.includes(priceFilter) && ageRange.includes(ageRangeFilter) && stock.includes(stockFilter)) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
             }
         });
     }
+});
+
 </script>
 
   
