@@ -112,7 +112,7 @@
                         </td>
                         <td>
                             <p class="text-xs font-weight-bold mb-0">${borrower}</p>
-                            <p class="text-xs text-secondary mb-0">User</p>
+                            <p class="text-xs text-secondary mb-0">General User</p>
                         </td>
                         <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">${bookDetails.availability ? 'Borrowed' : 'Returned'}</span>
