@@ -94,10 +94,10 @@
                                     </tbody>
                                 </table>
 
-                                <div id="pagination-controls">
-                                    <button id="prev-page" disabled>Previous</button>
+                                <div id="pagination-controls" class="d-flex align-items-center">
+                                    <button id="prev-page" class="btn bg-gradient-dark mb-0" disabled>Previous</button>
                                     <span id="page-number">Page 1</span>
-                                    <button id="next-page">Next</button>
+                                    <button id="next-page"class="btn bg-gradient-dark mb-0">Next</button>
                                 </div>
                             </div>
                         </div>
