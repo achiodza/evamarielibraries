@@ -21,8 +21,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  
   <style>
     .table {
         table-layout: fixed;
@@ -96,9 +95,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="pagination-controls" class="d-flex align-items-center" style="margin-left:45%">
+                            <div id="pagination-controls" class="d-flex align-items-center" style="margin-left:42%">
                                     <button id="prev-page" class="btn bg-gradient-dark mb-0" disabled>Previous</button>
-                                    <span id="page-number">Page 1</span>
+                                    <span id="page-number" style="margin-left:1px;">Page 1</span>
                                     <button id="next-page"class="btn bg-gradient-dark mb-0">Next</button>
                                 </div>
                         </div>
