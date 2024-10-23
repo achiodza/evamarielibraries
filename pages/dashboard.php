@@ -60,7 +60,7 @@
                 // Function to fetch and display the last book borrowed/returned
                 async function fetchLastBook() {
                     try {
-                        const response = await fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*', {
+                        const response = await fetch('https://admin.evamarielibraries.org/api/borrowedbooks?populate=*', {
                             headers: {
                                 'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
                             }
@@ -108,7 +108,7 @@
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           // Define the endpoint URL and the authorization token
-          const endpoint = 'http://203.161.49.218:1337/api/books-metas/';
+          const endpoint = 'https://admin.evamarielibraries.org/api/books-metas/';
           const token = '8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
       
           // Fetch total books from the booksmeta endpoint
@@ -181,7 +181,7 @@
             
             <script>
             // Fetch book details from the endpoint
-            fetch('http://203.161.49.218:1337/api/borrowedbooks?populate=*&_sort=createdAt:desc&_limit=5',{
+            fetch('https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&_sort=createdAt:desc&_limit=5',{
               headers: {
                 'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
                 'Content-Type': 'application/json'
@@ -250,7 +250,7 @@ const itemsPerPage = 5;
 function loadRequests(page = 0) {
   const offset = page * itemsPerPage;
 
-  fetch(`http://203.161.49.218:1337/api/borrowedbooks?populate=*&_start=${offset}&_limit=${itemsPerPage}`, {
+  fetch(`https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&_start=${offset}&_limit=${itemsPerPage}`, {
     headers: {
       'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
       'Content-Type': 'application/json'
@@ -316,7 +316,7 @@ function loadRequests(page = 0) {
 loadRequests();
 
 function updateBookAvailability(bookId, button) {
-  fetch(`http://203.161.49.218:1337/api/bookmetas/${bookId}`, {
+  fetch(`https://admin.evamarielibraries.org/api/bookmetas/${bookId}`, {
     method: 'PATCH', // Changed from PUT to PATCH
     headers: {
       'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
