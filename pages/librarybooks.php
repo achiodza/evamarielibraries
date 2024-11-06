@@ -229,7 +229,7 @@
 
 // Save book data function
 function saveBookData(book, bookId) {
-    // Save book data to localStorage
+    // Save book datya to localStorage
     localStorage.setItem('editBook', JSON.stringify({
         id: bookId,
         title: book.title,
