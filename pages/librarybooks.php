@@ -136,39 +136,39 @@
         })
         .then(response => response.json())
         .then(data => {
-    const tableBody = document.getElementById('book-table-body');
-    tableBody.innerHTML = '';  // Clear existing data
+            const tableBody = document.getElementById('book-table-body');
+            tableBody.innerHTML = '';  // Clear existing data
 
-    // Populate the table with paginated data
-    data.data.forEach(book => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>
-                <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
-                        <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class="text-xs mb-0">${book.attributes.description}</p>
-            </td>
-            <td>
-                <p class="text-xs mb-0">${book.attributes.genre}</p>
-            </td>
-            <td>
-                <p class="text-xs mb-0">${book.attributes.availability}</p>
-            </td>
-            <td>
-                <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" onclick="saveBookData(${JSON.stringify(book.attributes)}, ${book.id})">
-                    Edit
-                </a>
-            </td>
-        `;
-        tableBody.appendChild(row);
-    });
-
+            // Populate the table with paginated data
+            data.data.forEach(book => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
+                                <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text-xs mb-0">${book.attributes.description}</p>
+                    </td>
+                    <td>
+                        <p class="text-xs mb-0">${book.attributes.genre}</p>
+                    </td>
+                    <td>
+                        <p class="text-xs mb-0">${book.attributes.availability}</p>
+                    </td>
+                    <td>
+                        <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
+                           onclick="saveBookData(${JSON.stringify(book.attributes)}, ${book.id})">
+                            Edit
+                        </a>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
 
             // Update pagination controls
             document.getElementById('page-number').textContent = `Page ${currentPage}`;
@@ -195,7 +195,8 @@
         currentPage++;
         fetchData(currentPage);
     });
-    
+
+    // Functionality for adding filters
     function addFilterFunctionality() {
         document.getElementById('filter-title-author').addEventListener('input', filterTable);
         document.getElementById('filter-description').addEventListener('input', filterTable);
@@ -203,6 +204,7 @@
         document.getElementById('filter-availability').addEventListener('input', filterTable);
     }
 
+    // Function to filter the table based on input
     function filterTable() {
         const titleAuthorFilter = document.getElementById('filter-title-author').value.toLowerCase();
         const descriptionFilter = document.getElementById('filter-description').value.toLowerCase();
@@ -224,6 +226,8 @@
         });
     }
 });
+
+// Save book data function
 function saveBookData(book, bookId) {
     // Save book data to localStorage
     localStorage.setItem('editBook', JSON.stringify({
@@ -244,7 +248,6 @@ function saveBookData(book, bookId) {
     // Redirect to editbook.php page
     window.location.href = `./editbook.php?bookId=${bookId}`;
 }
-
 
 </script>
   
