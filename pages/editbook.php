@@ -73,13 +73,13 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Title:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="title" name="title" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Author:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="author" name="author" class="form-control" required>
                 </div>
             </div>
@@ -88,13 +88,13 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Genre:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="genre" name="genre" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Language:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="language" name="language" class="form-control" required>
                 </div>
             </div>
@@ -103,13 +103,13 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Pages:</label>
+                    <label class="form-label"></label>
                     <input type="number" id="pages" name="pages" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Publication Date:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="publicationDate" name="publicationDate" class="form-control" required>
                 </div>
             </div>
@@ -118,7 +118,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
             <div class="input-group input-group-outline">
-                <label class="form-label">Rating:</label>
+                <label class="form-label"></label>
                 <input type="number" step="0.1" id="rating" name="rating" class="form-control" required min="0" max="5">
             </div>
 
