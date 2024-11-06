@@ -160,7 +160,7 @@
 
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Book ID:</label>
+                    <label class="form-label"></label>
                     <input type="text" id="isbn" name="isbn" class="form-control" required>
                 </div>
             </div>
