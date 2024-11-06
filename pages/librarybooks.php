@@ -162,11 +162,12 @@
                     </td>
                     <td>
                         <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
-                           onclick="saveBookData(${JSON.stringify(book.attributes)}, ${book.id})">
+                        onclick="saveBookData(${book.id}, '${book.attributes.title}', '${book.attributes.author}', '${book.attributes.genre}', '${book.attributes.language}', '${book.attributes.pages}', '${book.attributes.publicationDate}', '${book.attributes.rating}', '${book.attributes.timesBorrowed}', '${book.attributes.description}', '${book.attributes.availability}', '${book.attributes.isbn}')">
                             Edit
                         </a>
                     </td>
-                `;
+
+                    `;
                 tableBody.appendChild(row);
             });
 
@@ -228,21 +229,21 @@
 });
 
 // Save book data function
-function saveBookData(book, bookId) {
-    // Save book datya to localStorage
+function saveBookData(bookId, title, author, genre, language, pages, publicationDate, rating, timesBorrowed, description, availability, isbn) {
+    // Save book data to localStorage_Shifu
     localStorage.setItem('editBook', JSON.stringify({
         id: bookId,
-        title: book.title,
-        author: book.author,
-        genre: book.genre,
-        language: book.language,  // Add language data here
-        pages: book.pages,  // Add pages data here
-        publicationDate: book.publicationDate,  // Add publication date data here
-        rating: book.rating,  // Add rating data here
-        timesBorrowed: book.timesBorrowed,  // Add times borrowed data here
-        description: book.description,
-        availability: book.availability,  // Store availability as a boolean
-        isbn: book.isbn  // Store ISBN
+        title: title,
+        author: author,
+        genre: genre,
+        language: language,  // Add language data here
+        pages: pages,  // Add pages data here
+        publicationDate: publicationDate,  // Add publication date data here
+        rating: rating,  // Add rating data here
+        timesBorrowed: timesBorrowed,  // Add times borrowed data here
+        description: description,
+        availability: availability,  // Store availability as a boolean
+        isbn: isbn  // Store ISBN
     }));
 
     // Redirect to editbook.php page
