@@ -196,6 +196,29 @@
     </footer>
 </div>
 <script>
+ document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve book data from localStorage
+    const bookData = JSON.parse(localStorage.getItem('editBook'));
+
+    if (bookData) {
+        // Populate form fields with book data
+        document.getElementById('title').value = bookData.title;
+        document.getElementById('author').value = bookData.author;
+        document.getElementById('genre').value = bookData.genre;
+        document.getElementById('language').value = bookData.language;
+        document.getElementById('pages').value = bookData.pages;
+        document.getElementById('publicationDate').value = bookData.publicationDate;
+        document.getElementById('rating').value = bookData.rating;
+        document.getElementById('timesBorrowed').value = bookData.timesBorrowed;
+        document.getElementById('description').value = bookData.description;
+        document.getElementById('availability').value = bookData.availability ? "true" : "false";
+        document.getElementById('isbn').value = bookData.isbn;
+    } else {
+        console.error('No book data found in localStorage');
+    }
+});
+
+
         document.getElementById('bookForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 

@@ -136,38 +136,39 @@
         })
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('book-table-body');
-            tableBody.innerHTML = '';  // Clear existing data
+    const tableBody = document.getElementById('book-table-body');
+    tableBody.innerHTML = '';  // Clear existing data
 
-            // Populate the table with paginated data
-            data.data.forEach(book => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
-                                <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.description}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.genre}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.availability}</p>
-                    </td>
-                    <td>
-                        <a href="./editbook.php?${book.id}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit book">
-                            Edit
-                        </a>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
+    // Populate the table with paginated data
+    data.data.forEach(book => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
+                        <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.description}</p>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.genre}</p>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.availability}</p>
+            </td>
+            <td>
+                <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" onclick="saveBookData(${JSON.stringify(book.attributes)}, ${book.id})">
+                    Edit
+                </a>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+
 
             // Update pagination controls
             document.getElementById('page-number').textContent = `Page ${currentPage}`;
@@ -223,6 +224,27 @@
         });
     }
 });
+function saveBookData(book, bookId) {
+    // Save book data to localStorage
+    localStorage.setItem('editBook', JSON.stringify({
+        id: bookId,
+        title: book.title,
+        author: book.author,
+        genre: book.genre,
+        language: book.language,  // Add language data here
+        pages: book.pages,  // Add pages data here
+        publicationDate: book.publicationDate,  // Add publication date data here
+        rating: book.rating,  // Add rating data here
+        timesBorrowed: book.timesBorrowed,  // Add times borrowed data here
+        description: book.description,
+        availability: book.availability,  // Store availability as a boolean
+        isbn: book.isbn  // Store ISBN
+    }));
+
+    // Redirect to editbook.php page
+    window.location.href = `./editbook.php?bookId=${bookId}`;
+}
+
 
 </script>
   
