@@ -82,8 +82,8 @@
         </div>
       </div>
       <!-- Books Metas -->
-      <div class="row">
-      <div class="col-md-6">
+      <div class="row" style="margin-top:3%;">
+      <div class="col-md-6" >
         <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
           <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
           <h6 class="mb-0">Books Metas</h6>
