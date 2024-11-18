@@ -74,10 +74,10 @@
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                        <th>Username</th>
+                        <th>Full Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Next of Kin</th>
+                        
                         <th>Location</th>
                         <th>Signed Up On</th>
                         <th>Actions</th>
@@ -86,9 +86,10 @@
                         <th><input type="text" class="form-control" id="filter-username" placeholder="Filter by username"></th>
                         <th><input type="text" class="form-control" id="filter-email" placeholder="Filter by email"></th>
                         <th><input type="text" class="form-control" id="filter-phone" placeholder="Filter by phone number"></th>
-                        <th><input type="text" class="form-control" id="filter-nextofkin" placeholder="Filter by next of kin"></th>
-                        <th><input type="text" class="form-control" id="filter-date" placeholder="Filter by Date of Registration"></th>
+                        
+                       
                         <th><input type="text" class="form-control" id="filter-location" placeholder="Filter by location"></th>
+                        <th><input type="text" class="form-control" id="filter-date" placeholder="Filter by Date of Registration"></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -163,7 +164,7 @@
                     <td>${user.username}</td>
                     <td>${user.email}</td>
                     <td>${user.phoneNo || 'N/A'}</td>
-                    <td>${user.nextOfKin || 'N/A'}</td>
+                  
                     <td>${user.location || 'N/A'}</td>
                     <td>${user.createdAt || 'N/A'}</td>
                     <td><a href="./delete-account.php">Delete</a></td>
