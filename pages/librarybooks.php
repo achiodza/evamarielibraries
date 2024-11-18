@@ -72,6 +72,9 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
+                            <div class="search-container">
+                                <input type="text" id="search-input" placeholder="Search by title or author..." />
+                            </div>
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
@@ -81,13 +84,7 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Availability</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                         </tr>
-                                        <tr>
-                                            <th><input type="text" class="form-control" id="filter-title-author" placeholder="Filter by title or author"></th>
-                                            <th><input type="text" class="form-control" id="filter-description" placeholder="Filter by description"></th>
-                                            <th><input type="text" class="form-control" id="filter-genre" placeholder="Filter by genre"></th>
-                                            <th><input type="text" class="form-control" id="filter-availability" placeholder="Filter by availability"></th>
-                                            <th></th>
-                                        </tr>
+                                    
                                     </thead>
                                     <tbody id="book-table-body">
                                         <!-- Book information will be populated here -->
@@ -123,68 +120,91 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    let currentPage = 1;  // Current page of data
-    const pageSize = 10;   // Number of items per page
+document.addEventListener('DOMContentLoaded', () => {
+    let currentPage = 1; // Current page of data
+    const pageSize = 10; // Number of items per page
 
+    // Fetch and populate data with pagination
     const fetchData = (page) => {
-        fetch(`https://admin.evamarielibraries.org/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, {
+        const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+        fetchBooks(url);
+    };
+
+    // Fetch books from a given URL and populate the table
+    const fetchBooks = (url) => {
+        fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
+                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
             }
         })
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('book-table-body');
-            tableBody.innerHTML = '';  // Clear existing data
-
-            // Populate the table with paginated data
-            data.data.forEach(book => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
-                                <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.description}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.genre}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs mb-0">${book.attributes.availability}</p>
-                    </td>
-                    <td>
-                        <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
-                        onclick="saveBookData(${book.id}, '${book.attributes.title}', '${book.attributes.author}', '${book.attributes.genre}', '${book.attributes.language}', '${book.attributes.pages}', '${book.attributes.publicationDate}', '${book.attributes.rating}', '${book.attributes.timesBorrowed}', '${book.attributes.description}', '${book.attributes.availability}', '${book.attributes.isbn}')">
-                            Edit
-                        </a>
-                    </td>
-
-                    `;
-                tableBody.appendChild(row);
-            });
+            populateTable(data.data);
 
             // Update pagination controls
-            document.getElementById('page-number').textContent = `Page ${currentPage}`;
-            document.getElementById('prev-page').disabled = currentPage === 1;
-            document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
-
-            addFilterFunctionality();  // Reapply filter functionality to the new rows
+            if (data.meta) {
+                document.getElementById('page-number').textContent = `Page ${currentPage}`;
+                document.getElementById('prev-page').disabled = currentPage === 1;
+                document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
+            }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error fetching books:', error));
     };
 
-    // Load the first page on page load
+    // Populate the table with book data
+    const populateTable = (books) => {
+        const tableBody = document.getElementById('book-table-body');
+        tableBody.innerHTML = ''; // Clear existing data
+
+        books.forEach(book => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
+                            <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p class="text-xs mb-0">${book.attributes.description}</p>
+                </td>
+                <td>
+                    <p class="text-xs mb-0">${book.attributes.genre}</p>
+                </td>
+                <td>
+                    <p class="text-xs mb-0">${book.attributes.availability ? 'Available' : 'Unavailable'}</p>
+                </td>
+                <td>
+                    <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
+                    onclick="saveBookData(${book.id}, '${book.attributes.title}', '${book.attributes.author}', '${book.attributes.genre}', '${book.attributes.language}', '${book.attributes.pages}', '${book.attributes.publicationDate}', '${book.attributes.rating}', '${book.attributes.timesBorrowed}', '${book.attributes.description}', '${book.attributes.availability}', '${book.attributes.isbn}')">
+                        Edit
+                    </a>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    };
+
+    // Search functionality
+    document.getElementById('search-input').addEventListener('input', (event) => {
+        const query = event.target.value.trim().toLowerCase();
+
+        if (query.length > 0) {
+            const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&filters[$or][0][title][$containsi]=${query}&filters[$or][1][author][$containsi]=${query}`;
+            fetchBooks(url);
+        } else {
+            // Reload paginated data when search is cleared
+            fetchData(currentPage);
+        }
+    });
+
+    // Initial fetch for paginated data
     fetchData(currentPage);
 
-    // Handle pagination controls
+    // Pagination controls
     document.getElementById('prev-page').addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
@@ -196,61 +216,29 @@
         currentPage++;
         fetchData(currentPage);
     });
-
-    // Functionality for adding filters
-    function addFilterFunctionality() {
-        document.getElementById('filter-title-author').addEventListener('input', filterTable);
-        document.getElementById('filter-description').addEventListener('input', filterTable);
-        document.getElementById('filter-genre').addEventListener('input', filterTable);
-        document.getElementById('filter-availability').addEventListener('input', filterTable);
-    }
-
-    // Function to filter the table based on input
-    function filterTable() {
-        const titleAuthorFilter = document.getElementById('filter-title-author').value.toLowerCase();
-        const descriptionFilter = document.getElementById('filter-description').value.toLowerCase();
-        const genreFilter = document.getElementById('filter-genre').value.toLowerCase();
-        const availabilityFilter = document.getElementById('filter-availability').value.toLowerCase();
-
-        const rows = document.querySelectorAll('#book-table-body tr');
-        rows.forEach(row => {
-            const titleAuthor = row.cells[0].innerText.toLowerCase();
-            const description = row.cells[1].innerText.toLowerCase();
-            const genre = row.cells[2].innerText.toLowerCase();
-            const availability = row.cells[3].innerText.toLowerCase();
-
-            if (titleAuthor.includes(titleAuthorFilter) && description.includes(descriptionFilter) && genre.includes(genreFilter) && availability.includes(availabilityFilter)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
 });
 
 // Save book data function
 function saveBookData(bookId, title, author, genre, language, pages, publicationDate, rating, timesBorrowed, description, availability, isbn) {
-    // Save book data to localStorage_Shifu
     localStorage.setItem('editBook', JSON.stringify({
         id: bookId,
         title: title,
         author: author,
         genre: genre,
-        language: language,  // Add language data here
-        pages: pages,  // Add pages data here
-        publicationDate: publicationDate,  // Add publication date data here
-        rating: rating,  // Add rating data here
-        timesBorrowed: timesBorrowed,  // Add times borrowed data here
+        language: language,
+        pages: pages,
+        publicationDate: publicationDate,
+        rating: rating,
+        timesBorrowed: timesBorrowed,
         description: description,
-        availability: availability,  // Store availability as a boolean
-        isbn: isbn  // Store ISBN
+        availability: availability,
+        isbn: isbn
     }));
 
-    // Redirect to editbook.php page
     window.location.href = `./editbook.php?bookId=${bookId}`;
 }
-
 </script>
+
   
   </main>
  
