@@ -82,6 +82,7 @@
         </div>
       </div>
       <!-- Books Metas -->
+      <div class="row">
       <div class="col-md-6">
         <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
           <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
@@ -105,6 +106,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 
@@ -147,16 +149,64 @@
       }
     };
 
-    document.getElementById('download-borrowedbooks-excel').addEventListener('click', () => {
-      fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
-        data.map(record => ({
-          UserID: record.attributes.userid,
-          BorrowedAt: record.attributes.createdAt,
-          BookTitle: record.attributes.bookdetail[0]?.title || 'N/A',
-          Author: record.attributes.bookdetail[0]?.author || 'N/A'
-        }))
-      );
-    });
+    document.getElementById('download-booksmetas-excel').addEventListener('click', async () => {
+  const fetchAllBooksMetas = async () => {
+    let allData = [];
+    let page = 1;
+    const pageSize = 100; // Assuming API supports specifying a page size
+
+    try {
+      while (true) {
+        const response = await fetch(
+          `https://admin.evamarielibraries.org/api/books-metas?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+          {
+            method: 'GET',
+            headers: {
+              'Authorization': tokens.booksMetas,
+            },
+          }
+        );
+
+        const data = await response.json();
+        if (!data || !data.data || data.data.length === 0) {
+          break; // Stop fetching if no more data
+        }
+
+        allData = [...allData, ...data.data];
+        page += 1; // Move to the next page
+      }
+    } catch (error) {
+      console.error('Error fetching paginated books metas data:', error);
+      alert('Failed to fetch books metas data.');
+    }
+
+    return allData;
+  };
+
+  try {
+    const data = await fetchAllBooksMetas();
+    if (!data || data.length === 0) {
+      alert('No books metas data available to download.');
+      return;
+    }
+
+    const formattedData = data.map(meta => ({
+      MetaID: meta.id,
+      Title: meta.attributes.title,
+      Genre: meta.attributes.genre || 'N/A',
+      PublishedYear: meta.attributes.publishedYear || 'N/A',
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'BooksMetas');
+    XLSX.writeFile(workbook, `Books_Metas_Data.xlsx`);
+  } catch (error) {
+    console.error('Error processing books metas data:', error);
+    alert('Failed to process books metas data.');
+  }
+});
+
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
       fetchDataAndDownload('users', 'Users_Data', data =>
