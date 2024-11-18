@@ -24,6 +24,53 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   
 </head>
+<style>
+    .pagination-controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Adds uniform spacing between buttons */
+    }
+
+    .pagination-controls button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 25px; /* Rounded buttons */
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .pagination-controls button:hover:not(.disabled) {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: translateY(-2px); /* Lift button slightly */
+    }
+
+    .pagination-controls button.disabled {
+        background-color: #cccccc;
+        color: #666666; /* Grey text for disabled button */
+        cursor: not-allowed;
+        box-shadow: none; /* Remove shadow for disabled state */
+    }
+
+    .pagination-controls button:focus {
+        outline: none;
+        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.6); /* Focus glow effect */
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 576px) {
+        .pagination-controls button {
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+    }
+</style>
+
 
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
