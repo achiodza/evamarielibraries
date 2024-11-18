@@ -163,22 +163,22 @@
           <div class="card h-100 mb-4">
             <div class="card-header pb-0 px-3">
               <div class="row">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <h6 class="mb-0">Recently Borrowed Books</h6>
                 </div>
-                <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
+                <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center"> -->
                   <!-- <i class="material-icons me-2 text-lg">date_range</i> -->
                   
-                </div>
+                <!-- </div>
               </div>
-            </div>
-            <div class="card-body pt-4 p-3">
+            </div> -->
+            <!-- <div class="card-body pt-4 p-3">
               <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
-              <ul class="list-group" id="book-list">
+              <ul class="list-group" id="book-list"> -->
                 <!-- List items will be populated here by JavaScript -->
-              </ul>
+              <!-- </ul>
             </div>
-            
+             -->
             <script>
             // Fetch book details from the endpoint
             fetch('https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&_sort=createdAt:desc&_limit=5',{
@@ -229,7 +229,7 @@
             
           </div>
         </div>
-        <div class="col-md-6 mt-4">
+        <div class="col-md-12 mt-4">
           <div class="card">
             <div class="card-header pb-0 px-3">
               <h6 class="mb-0">Borrowing Request Details Queue</h6>
