@@ -243,36 +243,45 @@
         </div>
 
         <script>
+
   let currentPage = 0;
   const itemsPerPage = 15;
 
+  // Load Borrowed Books
   function loadRequests(page = 0) {
+    currentPage = page;
     const offset = page * itemsPerPage;
 
-    fetch(`https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&sort[0]=createdAt:desc&_start=${offset}&_limit=${itemsPerPage}`, {
-      headers: {
+    fetch(
+      `https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&sort[0]=createdAt:desc&pagination[start]=${offset}&pagination[limit]=${itemsPerPage}`,
+      {
+        headers: {
         'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
         'Content-Type': 'application/json',
       },
-    })
-      .then(response => response.json())
-      .then(data => {
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
         const requests = data.data;
         const requestQueue = document.getElementById('request-queue');
 
         // Clear the previous list before adding new records
         requestQueue.innerHTML = '';
 
-        requests.forEach(request => {
+        requests.forEach((request) => {
           const attributes = request.attributes;
-          const requestDate = attributes.createdAt ? new Date(attributes.createdAt).toLocaleDateString() : 'N/A';
+          const requestDate = attributes.createdAt
+            ? new Date(attributes.createdAt).toLocaleDateString()
+            : 'N/A';
           const user = attributes.userid || 'N/A';
           const bookTitle = attributes.bookdetail[0]?.title || 'N/A';
           const phoneNumber = attributes.phoneNo || 'N/A';
           const category = attributes.bookdetail[0]?.genre || 'N/A';
 
           const listItem = document.createElement('li');
-          listItem.className = 'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
+          listItem.className =
+            'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
 
           listItem.innerHTML = `
             <div class="d-flex flex-column">
@@ -290,30 +299,36 @@
           requestQueue.appendChild(listItem);
         });
 
-        // Add pagination controls
-        const pagination = document.getElementById('pagination-controls');
-        pagination.innerHTML = `
-          <button ${currentPage === 0 ? 'disabled' : ''} onclick="loadRequests(${currentPage - 1})">Previous</button>
-          <button ${requests.length < itemsPerPage ? 'disabled' : ''} onclick="loadRequests(${currentPage + 1})">Next</button>
-        `;
-
-        // Add event listeners
+        // Update Pagination Controls
+        updatePaginationControls(data.meta.pagination);
         addEventListeners();
       })
-      .catch(error => console.error('Error fetching book requests:', error));
+      .catch((error) => console.error('Error fetching book requests:', error));
   }
 
+  // Update Pagination Controls
+  function updatePaginationControls(pagination) {
+    const paginationControls = document.getElementById('pagination-controls');
+    paginationControls.innerHTML = `
+      <button ${currentPage === 0 ? 'disabled' : ''} onclick="loadRequests(${currentPage - 1})">Previous</button>
+      <button ${
+        currentPage + 1 >= pagination.pageCount ? 'disabled' : ''
+      } onclick="loadRequests(${currentPage + 1})">Next</button>
+    `;
+  }
+
+  // Add Event Listeners for Approve and Return Buttons
   function addEventListeners() {
-    // Approve button logic
-    document.querySelectorAll('.approve-btn').forEach(button => {
+    // Approve Button
+    document.querySelectorAll('.approve-btn').forEach((button) => {
       button.addEventListener('click', function () {
         const bookId = this.getAttribute('data-book-id');
         updateBookAvailability(bookId, this);
       });
     });
 
-    // Return button logic
-    document.querySelectorAll('.return-btn').forEach(button => {
+    // Return Button
+    document.querySelectorAll('.return-btn').forEach((button) => {
       button.addEventListener('click', function () {
         const bookId = this.getAttribute('data-book-id');
         if (confirm('Are you sure you want to return this book?')) {
@@ -323,6 +338,7 @@
     });
   }
 
+  // Approve Book (Update Availability)
   function updateBookAvailability(bookId, button) {
     fetch(`https://admin.evamarielibraries.org/api/bookmetas/${bookId}`, {
       method: 'PATCH',
@@ -334,16 +350,16 @@
         data: { availability: false },
       }),
     })
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(() => {
         alert('Book approved successfully!');
-        // Remove the approved book from the list
         const listItem = button.closest('li');
-        listItem.remove();
+        listItem.remove(); // Remove the approved book from the list
       })
-      .catch(error => console.error('Error updating book availability:', error));
+      .catch((error) => console.error('Error updating book availability:', error));
   }
 
+  // Delete Borrowed Book Record
   function deleteBorrowedBook(bookId, button) {
     fetch(`https://admin.evamarielibraries.org/api/borrowedbooks/${bookId}`, {
       method: 'DELETE',
@@ -352,23 +368,21 @@
         'Content-Type': 'application/json',
       },
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
           alert('Book returned successfully!');
-          // Remove the returned book from the list
           const listItem = button.closest('li');
-          listItem.remove();
+          listItem.remove(); // Remove the returned book from the list
         } else {
-          throw new Error('Failed to return book.');
+          throw new Error('Failed to return the book.');
         }
       })
-      .catch(error => console.error('Error returning book:', error));
+      .catch((error) => console.error('Error returning book:', error));
   }
 
-  // Initial load
+  // Initial Load
   loadRequests();
 </script>
-
 
         
        
