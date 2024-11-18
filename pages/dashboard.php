@@ -204,7 +204,7 @@
       
             // Update the HTML content with the total number of books
             const totalBooksElementcount = document.getElementById('total-books-count');
-            totalBooksElementcount.textContent = totalBooks || 0; // Display 0 if totalBooks is undefined
+            totalBooksElementcount.textContent = totalBookscount || 0; // Display 0 if totalBooks is undefined
           })
           .catch(error => console.error('Error fetching booksmeta:', error));
         });
