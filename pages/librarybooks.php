@@ -72,8 +72,8 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
-                                <div col-md-6>
-                            <div class="search-container input-group input-group-outline" style="margin-left:2%;margin-right:2%">
+                                <div col-md-6 style="margin:2%">
+                            <div class="search-container input-group input-group-outline" >
                                 <input class="form-control" type="text" id="search-input" placeholder="Search by title or author..." />
                             </div>
                             </div>
