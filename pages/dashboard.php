@@ -192,7 +192,7 @@
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Books Borrowed</p>
                     <!-- Add an ID to the h4 element to update its content dynamically -->
-                    <h4 id="" class="mb-0">Loading...</h4> <!--todays-total-revenue-->
+                    <h4 id="total-books-count" class="mb-0">Loading...</h4> <!--todays-total-revenue-->
                 </div>
             </div>
             <hr class="dark horizontal my-0">
