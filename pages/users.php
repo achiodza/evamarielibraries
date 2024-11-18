@@ -79,7 +79,7 @@
                         <th>Phone Number</th>
                         
                         <th>Location</th>
-                        <th>Signed Up On</th>
+                        <th>Joined On</th>
                         <th>Actions</th>
                     </tr>
                     <tr>

@@ -225,7 +225,9 @@
           MetaID: meta.id,
           Title: meta.attributes.title,
           Genre: meta.attributes.genre || 'N/A',
-          PublishedYear: meta.attributes.publishedYear || 'N/A'
+          Language: meta.attributes.language || 'N/A',
+          BookID: meta.attributes.isbn || 'N/A',
+          PublishedYear: meta.attributes.publicationDate || 'N/A'
         }))
       );
     });
