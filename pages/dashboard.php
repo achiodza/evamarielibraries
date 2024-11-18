@@ -229,7 +229,7 @@
             
           </div>
         </div>
-        <div class="col-md-12 mt-4">
+        <div class="col-md-12 mt-8">
           <div class="card">
             <div class="card-header pb-0 px-3">
               <h6 class="mb-0">Borrowing Request Details Queue</h6>
