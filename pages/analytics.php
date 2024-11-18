@@ -28,7 +28,7 @@
     .btn {
       font-size: 14px;
       padding: 8px 20px;
-      border-radius: 30px;
+      border-radius: 10px;
     }
 
     .btn:hover {
@@ -81,75 +81,113 @@
           </div>
         </div>
       </div>
+      <!-- Books Metas -->
+      <div class="col-md-6">
+        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
+          <h6 class="mb-0">Books Metas</h6>
+          <div class="col-6 text-end">
+            <button class="btn bg-gradient-dark mb-0" id="download-booksmetas-excel">
+              <i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Toys -->
+      <div class="col-md-6">
+        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
+          <h6 class="mb-0">Toys</h6>
+          <div class="col-6 text-end">
+            <button class="btn bg-gradient-dark mb-0" id="download-toys-excel">
+              <i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // API Tokens
-    const borrowedBooksToken = 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
-    const usersToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
+    const tokens = {
+      borrowedBooks: 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+      users: 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b',
+      booksMetas: 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+      toys: 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25'
+    };
 
-    // Fetch and Download Borrowed Books Data
-    document.getElementById('download-borrowedbooks-excel').addEventListener('click', async () => {
-      const apiUrl = 'https://admin.evamarielibraries.org/api/borrowedbooks?populate=*';
+    const endpoints = {
+      borrowedBooks: 'https://admin.evamarielibraries.org/api/borrowedbooks?populate=*',
+      users: 'https://admin.evamarielibraries.org/api/users?populate=*',
+      booksMetas: 'https://admin.evamarielibraries.org/api/books-metas?populate=*',
+      toys: 'https://admin.evamarielibraries.org/api/toys?populate=*'
+    };
+
+    const fetchDataAndDownload = async (key, filename, processData) => {
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(endpoints[key], {
           method: 'GET',
-          headers: { 'Authorization': borrowedBooksToken }
+          headers: { 'Authorization': tokens[key] }
         });
         const data = await response.json();
 
         if (!data || !data.data || data.data.length === 0) {
-          alert('No borrowed books data available to download.');
+          alert(`No ${key.replace(/-/g, ' ')} data available to download.`);
           return;
         }
 
-        const formattedBooks = data.data.map(record => ({
+        const formattedData = processData(data.data);
+        const worksheet = XLSX.utils.json_to_sheet(formattedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, key);
+        XLSX.writeFile(workbook, `${filename}.xlsx`);
+      } catch (error) {
+        console.error(`Error fetching ${key} data:`, error);
+        alert(`Failed to fetch ${key} data.`);
+      }
+    };
+
+    document.getElementById('download-borrowedbooks-excel').addEventListener('click', () => {
+      fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
+        data.map(record => ({
           UserID: record.attributes.userid,
           BorrowedAt: record.attributes.createdAt,
           BookTitle: record.attributes.bookdetail[0]?.title || 'N/A',
           Author: record.attributes.bookdetail[0]?.author || 'N/A'
-        }));
-
-        const worksheet = XLSX.utils.json_to_sheet(formattedBooks);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Borrowed Books');
-        XLSX.writeFile(workbook, 'Borrowed_Books_Data.xlsx');
-      } catch (error) {
-        console.error('Error fetching borrowed books:', error);
-        alert('Failed to fetch borrowed books data.');
-      }
+        }))
+      );
     });
 
-    // Fetch and Download Users Data
-    document.getElementById('download-users-excel').addEventListener('click', async () => {
-      const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'GET',
-          headers: { 'Authorization': usersToken }
-        });
-        const data = await response.json();
-
-        if (!data || !data.data || data.data.length === 0) {
-          alert('No users data available to download.');
-          return;
-        }
-
-        const formattedUsers = data.data.map(user => ({
+    document.getElementById('download-users-excel').addEventListener('click', () => {
+      fetchDataAndDownload('users', 'Users_Data', data =>
+        data.map(user => ({
           Username: user.attributes.username,
           Email: user.attributes.email,
           Location: user.attributes.location || 'N/A'
-        }));
+        }))
+      );
+    });
 
-        const worksheet = XLSX.utils.json_to_sheet(formattedUsers);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Users Data');
-        XLSX.writeFile(workbook, 'Users_Data.xlsx');
-      } catch (error) {
-        console.error('Error fetching users data:', error);
-        alert('Failed to fetch users data.');
-      }
+    document.getElementById('download-booksmetas-excel').addEventListener('click', () => {
+      fetchDataAndDownload('booksMetas', 'Books_Metas_Data', data =>
+        data.map(meta => ({
+          MetaID: meta.id,
+          Title: meta.attributes.title,
+          Genre: meta.attributes.genre || 'N/A',
+          PublishedYear: meta.attributes.publishedYear || 'N/A'
+        }))
+      );
+    });
+
+    document.getElementById('download-toys-excel').addEventListener('click', () => {
+      fetchDataAndDownload('toys', 'Toys_Data', data =>
+        data.map(toy => ({
+          ToyID: toy.id,
+          Name: toy.attributes.name,
+          Category: toy.attributes.category || 'N/A',
+          Availability: toy.attributes.availability || 'N/A'
+        }))
+      );
     });
   </script>
 </body>
