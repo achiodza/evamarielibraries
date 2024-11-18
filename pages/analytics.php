@@ -64,7 +64,7 @@
                     <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
                     <h6 class="mb-0">List of Borrowed Books Against Users</h6>
                     <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" id="download-borrowedbooks-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
+                      <a class="btn bg-gradient-dark mb-0" name="download-borrowedbooks-excel" id="download-borrowedbooks-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,7 @@
 <script>
     document.getElementById('downloadBtn').addEventListener('click', function() {
       // Fetch the data from the API
-      axios.get('https://admin.evamarielibraries.org/api/books-metas/', {
+      axios.get('https://admin.evamarielibraries.org/api/books-metas?populate=*', {
         headers: {
           'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
           'Content-Type': 'application/json'
@@ -240,7 +240,7 @@
     });
   </script>
 <script>
-  const apiUrl = 'https://admin.evamarielibraries.org/api/users';  // Strapi API endpoint
+  const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';  // Strapi API endpoint
   const authToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
 
   // Function to fetch users data from Strapi API
