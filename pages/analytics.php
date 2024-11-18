@@ -211,9 +211,10 @@
     document.getElementById('download-users-excel').addEventListener('click', () => {
       fetchDataAndDownload('users', 'Users_Data', data =>
         data.map(user => ({
-          Username: user.attributes.username,
-          Email: user.attributes.email,
-          Location: user.attributes.location || 'N/A'
+          Id: user.id
+          Username: user.username,
+          Email: user.email,
+          Location: user.location || 'N/A'
         }))
       );
     });
