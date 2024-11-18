@@ -4,28 +4,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>Eva Marie Libraries | Analytics</title>
   <!-- Fonts and icons -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- SheetJS library -->
+  <style>
+    .card {
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn {
+      font-size: 14px;
+      padding: 8px 20px;
+      border-radius: 30px;
+    }
+
+    .btn:hover {
+      background-color: #4caf50;
+      color: #fff;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="" target="_blank">
+      <a class="navbar-brand m-0" href="#">
         <img src="../assets/img/logos.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eva Marie Libraries</span>
       </a>
@@ -34,280 +55,103 @@
     <?php include './includes/navheader.php'; ?>
   </aside>
 
-  <!-- Tables for Borrowing History -->
   <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-lg-11">
-        <div class="row">
-          <div class="card mt-4">
-            <div class="card-header pb-0 p-3">
-              <div class="row">
-                <h6 class="mb-0">Users Data Information</h6>
-                <div class="col-6 d-flex align-items-center">
-                  
-                </div>
-              </div>
-            </div>
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-md-6 mb-md-0 mb-4">
-                  <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                    <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Users In Our Database</h6>
-                    <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" id="download-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                    <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Borrowed Books Against Users</h6>
-                    <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" name="download-borrowedbooks-excel" id="download-borrowedbooks-excel"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Borrowed Books -->
+      <div class="col-md-6">
+        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
+          <h6 class="mb-0">Borrowed Books</h6>
+          <div class="col-6 text-end">
+            <button class="btn bg-gradient-dark mb-0" id="download-borrowedbooks-excel">
+              <i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download
+            </button>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-11">
-        <div class="row">
-          <div class="card mt-4">
-            <div class="card-header pb-0 p-3">
-              <div class="row">
-                <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Library Data Information</h6>
-                </div>
-              </div>
-            </div>
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-md-6 mb-md-0 mb-4">
-                  <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                    <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Books In Database</h6>
-                    <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" id="downloadBtn"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                    <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
-                    <h6 class="mb-0">List of Toys (Coming Soon)</h6>
-                    <div class="col-6 text-end">
-                    
-                      <a class="btn bg-gradient-dark mb-0"><i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Users -->
+      <div class="col-md-6">
+        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
+          <h6 class="mb-0">Users Data</h6>
+          <div class="col-6 text-end">
+            <button class="btn bg-gradient-dark mb-0" id="download-users-excel">
+              <i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download
+            </button>
           </div>
         </div>
       </div>
     </div>
-    
-    <script>
-        const apiUrll = 'https://admin.evamarielibraries.org/api/borrowedbooks?populate=*';  // Strapi API endpoint
-        const authTokenn = 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
+  </div>
 
-        // Function to fetch borrowed books data from Strapi API
-        async function fetchBorrowedBooks() {
-            try {
-                const response = await fetch(apiUrll, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': authTokenn
-                    }
-                });
-                const data = await response.json();
-                return data.data;  // Return the borrowed books data
-            } catch (error) {
-                console.error('Error fetching borrowed books:', error);
-            }
-        }
+  <script>
+    // API Tokens
+    const borrowedBooksToken = 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25';
+    const usersToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
 
-        // Function to convert JSON data to Excel and trigger download
-        function downloadExcel(borrowedBooks) {
-            const formattedBooks = [];
-
-            // Iterate through each borrowed book record
-            borrowedBooks.forEach(record => {
-                const { userid, createdAt } = record.attributes;
-                const bookDetails = record.attributes.bookdetail;
-
-                // Iterate through each book detail in the borrowed record
-                bookDetails.forEach(book => {
-                    formattedBooks.push({
-                        UserID: userid,
-                        BorrowedAt: createdAt,
-                        BookTitle: book.title,
-                        Author: book.author,
-                        Genre: book.genre,
-                        ISBN: book.isbn,
-                        Publisher: book.publisher,
-                        PublicationDate: book.publicationDate,
-                        Rating: book.rating,
-                        Language: book.language,
-                        TimesBorrowed: book.timesBorrowed || 'N/A',
-                        CoverImageURL: book.coverImage || 'N/A'
-                    });
-                });
-            });
-
-            // Convert JSON data to Excel worksheet
-            const worksheet = XLSX.utils.json_to_sheet(formattedBooks);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Borrowed Books');
-
-            // Exporting to Excel file
-            XLSX.writeFile(workbook, 'Borrowed_Books_Data.xlsx');
-        }
-
-        // Add event listener to download button
-        document.getElementById('download-borrowedbooks-excel').addEventListener('click', async () => {
-            const borrowedBooks = await fetchBorrowedBooks();  // Fetch borrowed books data from API
-            if (borrowedBooks && borrowedBooks.length > 0) {
-                downloadExcel(borrowedBooks);  // Trigger download of Excel file
-            } else {
-                alert('No data to download.');
-            }
+    // Fetch and Download Borrowed Books Data
+    document.getElementById('download-borrowedbooks-excel').addEventListener('click', async () => {
+      const apiUrl = 'https://admin.evamarielibraries.org/api/borrowedbooks?populate=*';
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: { 'Authorization': borrowedBooksToken }
         });
-    </script>
-    <footer class="footer py-4">
-        <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6 mb-lg-0 mb-4">
-                    
-                </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-      // Fetch the data from the API
-      axios.get('https://admin.evamarielibraries.org/api/books-metas?populate=*', {
-        headers: {
-          'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        const booksMeta = response.data.data;
+        const data = await response.json();
 
-        // Convert the booksMeta data into a format suitable for Excel
-        const excelData = booksMeta.map(book => ({
-          ID: book.id,
-          Title: book.attributes.title,
-          Author: book.attributes.author,
-          Genre: book.attributes.genre,
-          ISBN: book.attributes.isbn,
-          Language: book.attributes.language,
-          Pages: book.attributes.pages,
-          PublicationDate: book.attributes.publicationDate,
-          Availability: book.attributes.availability ? "Available" : "Not Available",
-          Rating: book.attributes.rating,
-          Description: book.attributes.description,
-          CreatedAt: new Date(book.attributes.createdAt).toLocaleDateString(),
-          UpdatedAt: new Date(book.attributes.updatedAt).toLocaleDateString(),
+        if (!data || !data.data || data.data.length === 0) {
+          alert('No borrowed books data available to download.');
+          return;
+        }
+
+        const formattedBooks = data.data.map(record => ({
+          UserID: record.attributes.userid,
+          BorrowedAt: record.attributes.createdAt,
+          BookTitle: record.attributes.bookdetail[0]?.title || 'N/A',
+          Author: record.attributes.bookdetail[0]?.author || 'N/A'
         }));
 
-        // Create a new worksheet
-        const worksheet = XLSX.utils.json_to_sheet(excelData);
-
-        // Create a new workbook
+        const worksheet = XLSX.utils.json_to_sheet(formattedBooks);
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Books Meta");
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Borrowed Books');
+        XLSX.writeFile(workbook, 'Borrowed_Books_Data.xlsx');
+      } catch (error) {
+        console.error('Error fetching borrowed books:', error);
+        alert('Failed to fetch borrowed books data.');
+      }
+    });
 
-        // Export the workbook as an Excel file
-        XLSX.writeFile(workbook, 'Books_Meta.xlsx');
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    // Fetch and Download Users Data
+    document.getElementById('download-users-excel').addEventListener('click', async () => {
+      const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: { 'Authorization': usersToken }
+        });
+        const data = await response.json();
+
+        if (!data || !data.data || data.data.length === 0) {
+          alert('No users data available to download.');
+          return;
+        }
+
+        const formattedUsers = data.data.map(user => ({
+          Username: user.attributes.username,
+          Email: user.attributes.email,
+          Location: user.attributes.location || 'N/A'
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(formattedUsers);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Users Data');
+        XLSX.writeFile(workbook, 'Users_Data.xlsx');
+      } catch (error) {
+        console.error('Error fetching users data:', error);
+        alert('Failed to fetch users data.');
+      }
     });
   </script>
-<script>
-  const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';  // Strapi API endpoint
-  const authToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
-
-  // Function to fetch users data from Strapi API
-  async function fetchUsers() {
-      try {
-          const response = await fetch(apiUrl, {
-              method: 'GET',
-              headers: {
-                  'Authorization': authToken
-              }
-          });
-          const data = await response.json();
-          return data;  // Return the user data
-      } catch (error) {
-          console.error('Error fetching users:', error);
-      }
-  }
-
-  // Function to convert JSON data to Excel and trigger download
-  function downloadExcel(users) {
-      const formattedUsers = users.map(user => ({
-          Username: user.username,
-          Email: user.email,
-          PhoneNumber: user.phoneNo || 'N/A',
-          NextOfKin: user.nextOfKin || 'N/A',
-          Location: user.location || 'N/A'
-      }));
-
-      const worksheet = XLSX.utils.json_to_sheet(formattedUsers);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Users Data');
-
-      // Exporting to Excel file
-      XLSX.writeFile(workbook, 'Users_Data.xlsx');
-  }
-
-  // Add event listener to download button
-  document.getElementById('download-excel').addEventListener('click', async () => {
-      const users = await fetchUsers();  // Fetch users data from the API
-      if (users && users.length > 0) {
-          downloadExcel(users);  // Trigger download of Excel file
-      } else {
-          alert('No data to download.');
-      }
-  });
-</script>
-
-  </main>
-  
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
 </html>
