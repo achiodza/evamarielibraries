@@ -248,7 +248,7 @@
         <script>
 
   let currentPage = 0;
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
 
   // Load Borrowed Books
   function loadRequests(page = 0) {
