@@ -79,6 +79,7 @@
                         <th>Phone Number</th>
                         <th>Next of Kin</th>
                         <th>Location</th>
+                        <th>Signed Up On</th>
                         <th>Actions</th>
                     </tr>
                     <tr>
@@ -86,6 +87,7 @@
                         <th><input type="text" class="form-control" id="filter-email" placeholder="Filter by email"></th>
                         <th><input type="text" class="form-control" id="filter-phone" placeholder="Filter by phone number"></th>
                         <th><input type="text" class="form-control" id="filter-nextofkin" placeholder="Filter by next of kin"></th>
+                        <th><input type="text" class="form-control" id="filter-date" placeholder="Filter by Date of Registration"></th>
                         <th><input type="text" class="form-control" id="filter-location" placeholder="Filter by location"></th>
                         <th></th>
                     </tr>
@@ -123,7 +125,7 @@
         const apiUrl = 'https://admin.evamarielibraries.org/api/users';  // Strapi API endpoint
         const authToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
 
-        const rowsPerPage = 20;
+        const rowsPerPage = 15;
         let currentPage = 1;
         let users = [];  // This will hold the fetched data
 
@@ -163,7 +165,8 @@
                     <td>${user.phoneNo || 'N/A'}</td>
                     <td>${user.nextOfKin || 'N/A'}</td>
                     <td>${user.location || 'N/A'}</td>
-                    <td><a href="./delete-account.php">Edit</a></td>
+                    <td>${user.createdAt || 'N/A'}</td>
+                    <td><a href="./delete-account.php">Delete</a></td>
                 `;
                 tbody.appendChild(row);
             }
