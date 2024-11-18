@@ -243,102 +243,132 @@
         </div>
 
         <script>
-        
-        let currentPage = 0;
-const itemsPerPage = 5;
+  let currentPage = 0;
+  const itemsPerPage = 15;
 
-function loadRequests(page = 0) {
-  const offset = page * itemsPerPage;
+  function loadRequests(page = 0) {
+    const offset = page * itemsPerPage;
 
-  fetch(`https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&_start=${offset}&_limit=${itemsPerPage}`, {
-    headers: {
-      'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    const requests = data.data; 
-    const requestQueue = document.getElementById('request-queue');
+    fetch(`https://admin.evamarielibraries.org/api/borrowedbooks?populate=*&sort[0]=createdAt:desc&_start=${offset}&_limit=${itemsPerPage}`, {
+      headers: {
+        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        const requests = data.data;
+        const requestQueue = document.getElementById('request-queue');
 
-    // Clear the previous list before adding new records
-    requestQueue.innerHTML = '';
+        // Clear the previous list before adding new records
+        requestQueue.innerHTML = '';
 
-    requests.forEach(request => {
-      const attributes = request.attributes;
-      const requestDate = attributes.createdAt ? new Date(attributes.createdAt).toLocaleDateString() : 'N/A';
-      const user = attributes.userid || 'N/A';
-      const bookTitle = attributes.bookdetail[0]?.title || 'N/A';
-      const phoneNumber = attributes.phoneNo || 'N/A';
-      const category = attributes.bookdetail[0]?.genre || 'N/A';
-      const availabilityStatus = attributes.bookdetail[0]?.availability ? 'Yes' : 'No';
+        requests.forEach(request => {
+          const attributes = request.attributes;
+          const requestDate = attributes.createdAt ? new Date(attributes.createdAt).toLocaleDateString() : 'N/A';
+          const user = attributes.userid || 'N/A';
+          const bookTitle = attributes.bookdetail[0]?.title || 'N/A';
+          const phoneNumber = attributes.phoneNo || 'N/A';
+          const category = attributes.bookdetail[0]?.genre || 'N/A';
 
-      if (availabilityStatus === 'Yes') {
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
+          const listItem = document.createElement('li');
+          listItem.className = 'list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg';
 
-        listItem.innerHTML = `
-          <div class="d-flex flex-column">
-            <h6 class="mb-3 text-sm">${bookTitle}</h6>
-            <span class="mb-2 text-xs">Requested By: <span class="text-dark font-weight-bold ms-sm-2">${user}</span></span>
-            <span class="mb-2 text-xs">Phone Number: <span class="text-dark ms-sm-2 font-weight-bold">${phoneNumber}</span></span>
-            <span class="mb-2 text-xs">Book Category: <span class="text-dark ms-sm-2 font-weight-bold">${category}</span></span>
-            <span class="mb-2 text-xs">Date Requested: <span class="text-dark ms-sm-2 font-weight-bold">${requestDate}</span></span>
-            <span class="text-xs">Availability: <span class="text-dark ms-sm-2 font-weight-bold">${availabilityStatus}</span></span>
-          </div>
-          <div class="ms-auto text-end">
-            <a class="btn btn-link text-dark px-3 mb-0 approve-btn" href="" data-book-id="${attributes.bookdetail[0].id}"><i class="material-icons text-sm me-2">edit</i>Approve</a>
-          </div>
+          listItem.innerHTML = `
+            <div class="d-flex flex-column">
+              <h6 class="mb-3 text-sm">${bookTitle}</h6>
+              <span class="mb-2 text-xs">Requested By: <span class="text-dark font-weight-bold ms-sm-2">${user}</span></span>
+              <span class="mb-2 text-xs">Phone Number: <span class="text-dark ms-sm-2 font-weight-bold">${phoneNumber}</span></span>
+              <span class="mb-2 text-xs">Book Category: <span class="text-dark ms-sm-2 font-weight-bold">${category}</span></span>
+              <span class="mb-2 text-xs">Date Requested: <span class="text-dark ms-sm-2 font-weight-bold">${requestDate}</span></span>
+            </div>
+            <div class="ms-auto text-end">
+              <button class="btn btn-success approve-btn" data-book-id="${attributes.bookdetail[0].id}">Approve</button>
+              <button class="btn btn-danger return-btn" data-book-id="${request.id}">Return</button>
+            </div>
+          `;
+          requestQueue.appendChild(listItem);
+        });
+
+        // Add pagination controls
+        const pagination = document.getElementById('pagination-controls');
+        pagination.innerHTML = `
+          <button ${currentPage === 0 ? 'disabled' : ''} onclick="loadRequests(${currentPage - 1})">Previous</button>
+          <button ${requests.length < itemsPerPage ? 'disabled' : ''} onclick="loadRequests(${currentPage + 1})">Next</button>
         `;
-        requestQueue.appendChild(listItem);
-      }
-    });
 
-    // Add pagination controls
-    const pagination = document.getElementById('pagination-controls');
-    pagination.innerHTML = `
-      <button ${currentPage === 0 ? 'disabled' : ''} onclick="loadRequests(${currentPage - 1})">Previous</button>
-      <button ${requests.length < itemsPerPage ? 'disabled' : ''} onclick="loadRequests(${currentPage + 1})">Next</button>
-    `;
+        // Add event listeners
+        addEventListeners();
+      })
+      .catch(error => console.error('Error fetching book requests:', error));
+  }
 
-    // Event listeners for Approve buttons
+  function addEventListeners() {
+    // Approve button logic
     document.querySelectorAll('.approve-btn').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         const bookId = this.getAttribute('data-book-id');
         updateBookAvailability(bookId, this);
       });
     });
-  })
-  .catch(error => console.error('Error fetching book requests:', error));
-}
 
-// Initial load
-loadRequests();
+    // Return button logic
+    document.querySelectorAll('.return-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const bookId = this.getAttribute('data-book-id');
+        if (confirm('Are you sure you want to return this book?')) {
+          deleteBorrowedBook(bookId, this);
+        }
+      });
+    });
+  }
 
-function updateBookAvailability(bookId, button) {
-  fetch(`https://admin.evamarielibraries.org/api/bookmetas/${bookId}`, {
-    method: 'PATCH', // Changed from PUT to PATCH
-    headers: {
-      'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      data: {
-        availability: false
-      }
+  function updateBookAvailability(bookId, button) {
+    fetch(`https://admin.evamarielibraries.org/api/bookmetas/${bookId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: { availability: false },
+      }),
     })
-  })
-  .then(response => response.json())
-  .then(updatedBook => {
-    console.log('Book updated:', updatedBook);
+      .then(response => response.json())
+      .then(() => {
+        alert('Book approved successfully!');
+        // Remove the approved book from the list
+        const listItem = button.closest('li');
+        listItem.remove();
+      })
+      .catch(error => console.error('Error updating book availability:', error));
+  }
 
-    // Remove the approved book from the list
-    const listItem = button.closest('li');
-    listItem.remove();
-  })
-  .catch(error => console.error('Error updating book availability:', error));
-}
+  function deleteBorrowedBook(bookId, button) {
+    fetch(`https://admin.evamarielibraries.org/api/borrowedbooks/${bookId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          alert('Book returned successfully!');
+          // Remove the returned book from the list
+          const listItem = button.closest('li');
+          listItem.remove();
+        } else {
+          throw new Error('Failed to return book.');
+        }
+      })
+      .catch(error => console.error('Error returning book:', error));
+  }
+
+  // Initial load
+  loadRequests();
 </script>
+
 
         
        
