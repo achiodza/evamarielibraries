@@ -225,12 +225,12 @@
       fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
         data.map(meta => ({
           MetaID: meta.id,
-          Title: meta.bookdetails.title,
-          Borrowed_By: meta.userid,
+          Title: meta.attributes.bookdetail.title,
+          Borrowed_By: meta.attributes.userid,
           Genre: meta.attributes.bookdetail.genre || 'N/A',
-          Language: meta.attributes.language || 'N/A',
-          BookID: meta.attributes.isbn || 'N/A',
-          PublishedYear: meta.attributes.publicationDate || 'N/A'
+          Language: meta.attributes.bookdetail.language || 'N/A',
+          BookID: meta.attributes.bookdetail.isbn || 'N/A',
+          PublishedYear: meta.attributes.bookdetail.publicationDate || 'N/A'
         }))
       );
     });
