@@ -194,13 +194,15 @@
       MetaID: meta.id,
       Title: meta.attributes.title,
       Genre: meta.attributes.genre || 'N/A',
-      PublishedYear: meta.attributes.publishedYear || 'N/A',
+      Language: meta.attributes.language || 'N/A',
+      BookID: meta.attributes.isbn || 'N/A',
+      PublishedYear: meta.attributes.publicationDate || 'N/A'
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(formattedData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'BooksMetas');
-    XLSX.writeFile(workbook, `Books_Metas_Data.xlsx`);
+    XLSX.writeFile(workbook, `Library_Books_Data.xlsx`);
   } catch (error) {
     console.error('Error processing books metas data:', error);
     alert('Failed to process books metas data.');
@@ -219,7 +221,7 @@
       );
     });
 
-    document.getElementById('download-booksmetas-excel').addEventListener('click', () => {
+    document.getElementById('download-excel').addEventListener('click', () => {
       fetchDataAndDownload('booksMetas', 'Books_Metas_Data', data =>
         data.map(meta => ({
           MetaID: meta.id,
