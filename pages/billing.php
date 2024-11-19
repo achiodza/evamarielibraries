@@ -57,7 +57,7 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Borrower</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Return Date</th>
-                        <th class="text-secondary opacity-7"></th>
+                        <th class="text-secondary opacity-7">Action</th>
                       </tr>
                     </thead>
                     <tbody id="borrowedBooksTable">
@@ -121,8 +121,8 @@
                             <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
                         </td>
                         <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                Edit
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs return-btn" data-book-id="${book.id}" data-toggle="tooltip" data-original-title="Edit user">
+                                Return
                             </a>
                         </td>
                     `;
@@ -144,7 +144,7 @@
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
-                </script>,
+                </script>
                
               </div>
             </div>
@@ -159,6 +159,50 @@
       </footer>
     </div>
   </main>
+
+  <script>
+      // Delete Borrowed Book Record
+  function deleteBorrowedBook(bookId, button) {
+    fetch(`https://admin.evamarielibraries.org/api/borrowedbooks/${bookId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Book returned successfully!');
+          const listItem = button.closest('li');
+          listItem.remove(); // Remove the returned book from the list
+        } else {
+          throw new Error('Failed to return the book.');
+        }
+      })
+      .catch((error) => console.error('Error returning book:', error));
+  }
+
+   // Add Event Listeners for Approve and Return Buttons
+   function addEventListeners() {
+    // Approve Button
+    document.querySelectorAll('.approve-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const bookId = this.getAttribute('data-book-id');
+        updateBookAvailability(bookId, this);
+      });
+    });
+
+    // Return Button
+    document.querySelectorAll('.return-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const bookId = this.getAttribute('data-book-id');
+        if (confirm('Are you sure you want to return this book?')) {
+          deleteBorrowedBook(bookId, this);
+        }
+      });
+    });
+  }
+  </script>
   
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
