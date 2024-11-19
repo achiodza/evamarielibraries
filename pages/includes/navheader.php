@@ -126,11 +126,11 @@
               
             </li>
             <li class="nav-item d-flex align-items-center">
-              <button class="btn bg-gradient-dark mb-0" onclick="window.location.href='addbook.php'">Add Book</button>
+              <button class="btn bg-gradient-info mb-0" onclick="window.location.href='addbook.php'">Add Book</button>
 
           </li>
           <li class="nav-item d-flex align-items-center">
-            <button style="margin-left: 10px;" class="btn bg-gradient-dark mb-0" onclick="window.location.href='addtoy.php'">Add Toy(s)</button>
+            <button style="margin-left: 10px;" class="btn bg-gradient-info mb-0" onclick="window.location.href='addtoy.php'">Add Toy(s)</button>
 
         </li>
           </ul>
