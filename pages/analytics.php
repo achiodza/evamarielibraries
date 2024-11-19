@@ -211,8 +211,9 @@
 
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
-      fetchDataAndDownload('users', 'Users_Data', data =>
+      fetchDataAndDownload('users', 'Users_Data',
       for (let i = startIndex; i < endIndex; i++) {
+        data =>
         const user = users[i];
         data.map(user => ({
           Id: user.id,
