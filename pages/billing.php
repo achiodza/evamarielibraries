@@ -121,7 +121,7 @@
                             <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
                         </td>
                         <td class="align-middle">
-                            <a class="text-secondary font-weight-bold text-xs return-btn" data-book-id="${book.id}" data-original-title="Edit user">
+                            <a class="btn text-secondary font-weight-bold text-xs return-btn" data-book-id="${book.id}" data-original-title="Edit user">
                                 Return
                             </a>
                         </td>
