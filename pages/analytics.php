@@ -225,7 +225,7 @@
       fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
         data.map(meta => ({
           MetaID: meta.id,
-          Title: meta.attributes.title,
+          Title: meta.bookdetails.title,
           Borrowed_By: meta.userid,
           Genre: meta.attributes.bookdetail.genre || 'N/A',
           Language: meta.attributes.language || 'N/A',
