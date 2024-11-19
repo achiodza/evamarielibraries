@@ -212,7 +212,7 @@
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
       fetchDataAndDownload('users', 'Users_Data',
-      for (let i = startIndex; i < endIndex; i++) {
+     
         data =>
         const user = users[i];
         data.map(user => ({
@@ -221,7 +221,7 @@
           Email: user.email,
           Location: user.location || 'N/A'
         }))
-    });
+    );
     });
 
     document.getElementById('download-excel').addEventListener('click', () => {
