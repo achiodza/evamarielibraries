@@ -212,13 +212,15 @@
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
       fetchDataAndDownload('users', 'Users_Data', data =>
+      for (let i = startIndex; i < endIndex; i++) {
+        const user = users[i];
         data.map(user => ({
           Id: user.id,
           Username: user.username,
           Email: user.email,
           Location: user.location || 'N/A'
         }))
-      );
+    });
     });
 
     document.getElementById('download-excel').addEventListener('click', () => {
