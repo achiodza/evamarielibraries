@@ -222,11 +222,12 @@
     });
 
     document.getElementById('download-borrowed-excel').addEventListener('click', () => {
-      fetchDataAndDownload('booksMetas', 'Books_Metas_Data', data =>
+      fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
         data.map(meta => ({
           MetaID: meta.id,
           Title: meta.attributes.title,
-          Genre: meta.attributes.genre || 'N/A',
+          Borrowed_By: meta.userid,
+          Genre: meta.attributes.bookdetail.genre || 'N/A',
           Language: meta.attributes.language || 'N/A',
           BookID: meta.attributes.isbn || 'N/A',
           PublishedYear: meta.attributes.publicationDate || 'N/A'
