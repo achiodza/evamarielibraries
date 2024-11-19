@@ -63,7 +63,7 @@
           <img class="w-10 me-3 mb-0" src="../assets/img/logos.png" alt="logo">
           <h6 class="mb-0">Borrowed Books</h6>
           <div class="col-6 text-end">
-            <button class="btn bg-gradient-dark mb-0" id="download-borrowedbooks-excel">
+            <button class="btn bg-gradient-dark mb-0" id="download-borrowed-excel">
               <i class="material-icons text-sm">cloud</i>&nbsp;&nbsp;Download
             </button>
           </div>
@@ -221,7 +221,7 @@
     );
     });
 
-    document.getElementById('download-excel').addEventListener('click', () => {
+    document.getElementById('download-borrowed-excel').addEventListener('click', () => {
       fetchDataAndDownload('booksMetas', 'Books_Metas_Data', data =>
         data.map(meta => ({
           MetaID: meta.id,
