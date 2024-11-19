@@ -102,7 +102,7 @@
                         <td>
                             <div class="d-flex px-2 py-1">
                                 <div>
-                                    <img src="https://admin.evamarielibraries.org${bookDetails.coverImage}" class="avatar avatar-sm me-3 border-radius-lg" alt="${bookDetails.title}">
+                                    // <img src="https://admin.evamarielibraries.org${bookDetails.coverImage}" class="avatar avatar-sm me-3 border-radius-lg" alt="${bookDetails.title}">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="mb-0 text-sm">${bookDetails.title}</h6>
@@ -144,7 +144,7 @@
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
-                </script>
+                </script>, Eva Marie Libraries.
                
               </div>
             </div>
