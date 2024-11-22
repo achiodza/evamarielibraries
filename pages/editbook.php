@@ -196,7 +196,7 @@
     </footer>
 </div>
 <script>
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Retrieve book data from localStorage
     const bookData = JSON.parse(localStorage.getItem('editBook'));
 
@@ -218,83 +218,88 @@
     }
 });
 
+document.getElementById('bookForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-        document.getElementById('bookForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
+    // Show the loader
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block';
 
-            // Show the loader
-            document.getElementById('loader').style.display = 'block';
+    // Disable the submit button to prevent multiple submissions
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
 
-            // Disable the submit button to prevent multiple submissions
-            const submitButton = event.target.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
+    let coverImageId;
+    const bookId = JSON.parse(localStorage.getItem('editBook')).id; // Ensure the book ID is stored in localStorage.
 
-            // Get form data
+    try {
+        // Image upload (optional)
+        const coverImageFile = document.getElementById('coverImage').files[0];
+        if (coverImageFile) {
             const formData = new FormData();
-            formData.append('files', document.getElementById('coverImage').files[0]);
+            formData.append('files', coverImageFile);
 
-            let coverImageId;
+            const imageResponse = await fetch('https://admin.evamarielibraries.org/api/upload', {
+                method: 'POST', // Confirm this method with your API documentation.
+                headers: {
+                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                },
+                body: formData
+            });
 
-            try {
-                // Upload image
-                const imageResponse = await fetch('https://admin.evamarielibraries.org/api/upload', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer 21cacb682481947a85cdb07d7d32580647e58194e373e7287ed4f3a0d4a0101a32080ddc785d8b457509fee2461349f13ae7cfda32837b701cbec6293e4ba92d01613460bf157bb23a161edd2d771f1f783df3fe02d8cda7a83c5d25bc63a04b6f377bed081a8aefa45271d872544fd77755c16c4b042964dae96ff58b4550de',
-                    },
-                    body: formData
-                });
-
-                if (!imageResponse.ok) {
-                    throw new Error('Image upload failed');
-                }
-
-                const imageData = await imageResponse.json();
-                coverImageId = imageData[0].id;
-
-                // Prepare book data
-                const bookData = {
-                    title: document.getElementById('title').value,
-                    author: document.getElementById('author').value,
-                    description: document.getElementById('description').value,
-                    availability: document.getElementById('availability').value === 'true',
-                    coverImage: coverImageId,
-                    genre: document.getElementById('genre').value,
-                    language: document.getElementById('language').value,
-                    pages: document.getElementById('pages').value,
-                    publicationDate: document.getElementById('publicationDate').value,
-                    rating: document.getElementById('rating').value,
-                    timesBorrowed: document.getElementById('timesBorrowed').value,
-                    isbn: document.getElementById('isbn').value
-                };
-
-                // Send book data
-                const bookResponse = await fetch('https://admin.evamarielibraries.org/api/books-metas/', {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ data: bookData })
-                });
-
-                if (!bookResponse.ok) {
-                    throw new Error('Book meta submission failed');
-                }
-
-                // Success: Clear the form and provide feedback
-                document.getElementById('bookForm').reset();
-                alert('Book submitted successfully!');
-
-            } catch (error) {
-                console.error('Error submitting the form:', error);
-                alert('There was an error submitting the form.');
-            } finally {
-                // Hide the loader and re-enable the submit button
-                document.getElementById('loader').style.display = 'none';
-                submitButton.disabled = false;
+            if (!imageResponse.ok) {
+                throw new Error('Image upload failed');
             }
+
+            const imageData = await imageResponse.json();
+            coverImageId = Array.isArray(imageData) ? imageData[0].id : imageData.id; // Handle response formats.
+        }
+
+        // Prepare book data
+        const bookData = {
+            title: document.getElementById('title').value,
+            author: document.getElementById('author').value,
+            description: document.getElementById('description').value,
+            availability: document.getElementById('availability').value === 'true',
+            coverImage: coverImageId, // Include only if a new image was uploaded.
+            genre: document.getElementById('genre').value,
+            language: document.getElementById('language').value,
+            pages: parseInt(document.getElementById('pages').value, 10),
+            publicationDate: document.getElementById('publicationDate').value,
+            rating: parseFloat(document.getElementById('rating').value),
+            timesBorrowed: parseInt(document.getElementById('timesBorrowed').value, 10),
+            isbn: document.getElementById('isbn').value
+        };
+
+        // Update book data
+        const bookResponse = await fetch(`https://admin.evamarielibraries.org/api/books-metas/${bookId}`, {
+            method: 'PUT', // Confirm this method with your API documentation.
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: bookData })
         });
+
+        if (!bookResponse.ok) {
+            const errorDetails = await bookResponse.json();
+            console.error('Book update failed:', errorDetails);
+            throw new Error('Book update failed');
+        }
+
+        // Success: Clear the form and provide feedback
+        document.getElementById('bookForm').reset();
+        alert('Book updated successfully!');
+    } catch (error) {
+        console.error('Error submitting the form:', error.message);
+        alert(`There was an error: ${error.message}`);
+    } finally {
+        // Hide the loader and re-enable the submit button
+        loader.style.display = 'none';
+        submitButton.disabled = false;
+    }
+});
+
 </script>
 
 
