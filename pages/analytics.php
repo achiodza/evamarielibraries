@@ -133,13 +133,17 @@
     });
     const data = await response.json();
 
-    // Adjust check for direct array response
-    if (!data || !Array.isArray(data) || data.length === 0) {
+    // Handle both response formats
+    const records = Array.isArray(data) 
+      ? data // Direct array
+      : (data.data || []); // Nested in data.data
+
+    if (!records || records.length === 0) {
       alert(`No ${key.replace(/-/g, ' ')} data available to download.`);
       return;
     }
 
-    const formattedData = processData(data); // Pass the direct array to processData
+    const formattedData = processData(records);
     const worksheet = XLSX.utils.json_to_sheet(formattedData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, key);
@@ -149,6 +153,7 @@
     alert(`Failed to fetch ${key} data.`);
   }
 };
+
 
     document.getElementById('download-booksmetas-excel').addEventListener('click', async () => {
   const fetchAllBooksMetas = async () => {
