@@ -166,7 +166,7 @@
                     <td>${user.phoneNo || 'N/A'}</td>
                   
                     <td>${user.location || 'N/A'}</td>
-                    <td>${user.createdAt || 'N/A'}</td>
+                    <td>${new Date(user.createdAt).toLocaleDateString() || 'N/A'}</td>
                     <td><a href="./delete-account.php">Delete</a></td>
                 `;
                 tbody.appendChild(row);
