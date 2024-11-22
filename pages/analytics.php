@@ -211,13 +211,15 @@
 
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
-      fetchDataAndDownload('users', 'Users_Data',data =>
-        data.map(user=> ({
+      fetchDataAndDownload('users', 'Users_Data', data =>
+        data.flatMap(entry =>
+          entry.user.map(user => ({
           Id: user.id,
           Username: user.username,
           Email: user.email,
           Location: user.location || 'N/A'
         }))
+      )
     );
     });
 
