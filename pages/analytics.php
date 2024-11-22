@@ -122,7 +122,7 @@
       borrowedBooks: 'https://admin.evamarielibraries.org/api/borrowedbooks?populate=*',
       users: 'https://admin.evamarielibraries.org/api/users?populate=*',
       booksMetas: 'https://admin.evamarielibraries.org/api/books-metas?populate=*',
-      toys: 'https://admin.evamarielibraries.org/api/toys?populate=*'
+      toys: 'https://admin.evamarielibraries.org/api/toymetas?populate=*'
     };
 
     const fetchDataAndDownload = async (key, filename, processData) => {
