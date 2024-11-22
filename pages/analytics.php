@@ -223,17 +223,20 @@
 
     document.getElementById('download-borrowed-excel').addEventListener('click', () => {
       fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
-        data.map(meta => ({
-          MetaID: meta.id,
-          Title: meta.attributes.bookdetail.title,
-          Borrowed_By: meta.attributes.userid,
-          Genre: meta.attributes.bookdetail.genre || 'N/A',
-          Language: meta.attributes.bookdetail.language || 'N/A',
-          BookID: meta.attributes.bookdetail.isbn || 'N/A',
-          PublishedYear: meta.attributes.bookdetail.publicationDate || 'N/A'
-        }))
+        data.flatMap(entry => 
+          entry.attributes.bookdetail.map(book => ({
+            MetaID: entry.id,
+            Title: book.title,
+            Borrowed_By: entry.attributes.userid,
+            Genre: book.genre || 'N/A',
+            Language: book.language || 'N/A',
+            BookID: book.isbn || 'N/A',
+            PublishedYear: book.publicationDate || 'N/A'
+          }))
+        )
       );
     });
+
 
     document.getElementById('download-toys-excel').addEventListener('click', () => {
       fetchDataAndDownload('toys', 'Toys_Data', data =>
