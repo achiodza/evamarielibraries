@@ -126,28 +126,29 @@
     };
 
     const fetchDataAndDownload = async (key, filename, processData) => {
-      try {
-        const response = await fetch(endpoints[key], {
-          method: 'GET',
-          headers: { 'Authorization': tokens[key] }
-        });
-        const data = await response.json();
+  try {
+    const response = await fetch(endpoints[key], {
+      method: 'GET',
+      headers: { 'Authorization': tokens[key] }
+    });
+    const data = await response.json();
 
-        if (!data || !data.data || data.data.length === 0) {
-          alert(`No ${key.replace(/-/g, ' ')} data available to download.`);
-          return;
-        }
+    // Adjust check for direct array response
+    if (!data || !Array.isArray(data) || data.length === 0) {
+      alert(`No ${key.replace(/-/g, ' ')} data available to download.`);
+      return;
+    }
 
-        const formattedData = processData(data.data);
-        const worksheet = XLSX.utils.json_to_sheet(formattedData);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, key);
-        XLSX.writeFile(workbook, `${filename}.xlsx`);
-      } catch (error) {
-        console.error(`Error fetching ${key} data:`, error);
-        alert(`Failed to fetch ${key} data.`);
-      }
-    };
+    const formattedData = processData(data); // Pass the direct array to processData
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, key);
+    XLSX.writeFile(workbook, `${filename}.xlsx`);
+  } catch (error) {
+    console.error(`Error fetching ${key} data:`, error);
+    alert(`Failed to fetch ${key} data.`);
+  }
+};
 
     document.getElementById('download-booksmetas-excel').addEventListener('click', async () => {
   const fetchAllBooksMetas = async () => {
@@ -224,7 +225,7 @@
 
     document.getElementById('download-borrowed-excel').addEventListener('click', () => {
       fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
-        data.flatMap(entry => 
+        data.flatMap(entry =>
           entry.attributes.bookdetail.map(book => ({
             MetaID: entry.id,
             Title: book.title,
