@@ -212,16 +212,15 @@
 
     document.getElementById('download-users-excel').addEventListener('click', () => {
       fetchDataAndDownload('users', 'Users_Data', data =>
-        data.flatMap(entry =>
-          entry.user.map(user => ({
+        data.map(user => ({
           Id: user.id,
           Username: user.username,
           Email: user.email,
           Location: user.location || 'N/A'
         }))
-      )
-    );
+      );
     });
+
 
     document.getElementById('download-borrowed-excel').addEventListener('click', () => {
       fetchDataAndDownload('borrowedBooks', 'Borrowed_Books_Data', data =>
