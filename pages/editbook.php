@@ -119,7 +119,7 @@
             <div class="col-md-6">
             <div class="input-group input-group-outline">
                 <label class="form-label"></label>
-                <input type="number" step="0.1" id="rating" name="rating" class="form-control" min="0" max="5">
+                <input type="text" step="0.1" id="rating" name="rating" class="form-control" min="0" max="5">
             </div>
 
             </div>
