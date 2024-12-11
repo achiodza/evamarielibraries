@@ -123,7 +123,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    let currentPage = 1; // Current page of data
+    
     const pageSize = 10; // Number of items per page
 
     // Fetch and populate data with pagination
