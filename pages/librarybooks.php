@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
                     onclick="saveBookData(${book.id}, '${book.attributes.title}', '${book.attributes.author}', '${book.attributes.genre}', '${book.attributes.language}', '${book.attributes.pages}', '${book.attributes.publicationDate}', '${book.attributes.rating}', '${book.attributes.timesBorrowed}', '${book.attributes.description}', '${book.attributes.availability}', '${book.attributes.isbn}')">
                         Edit
-                    </a> 
+                    </a>
                 </td>
             `;
             tableBody.appendChild(row);

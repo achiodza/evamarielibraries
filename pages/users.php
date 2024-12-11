@@ -123,7 +123,7 @@
 </div>
 
 <script>
-        const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';  // Strapi API endpoint
+        const apiUrl = 'https://admin.evamarielibraries.org/api/users?populate=*';  //
         const authToken = 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b';
 
         const rowsPerPage = 15;
@@ -146,35 +146,63 @@
                 console.error('Error fetching users:', error);
             }
         }
+// Function to delete a user by ID
+async function deleteUser(userId) {
+    const confirmDelete = confirm("Are you sure you want to delete this user?");
+    if (!confirmDelete) return; // Exit if the user cancels
 
-        // Function to render table rows dynamically
-        function renderTable(page = 1) {
-            const tbody = document.getElementById('user-table-body');
-            tbody.innerHTML = ''; // Clear previous data
-
-            // Calculate start and end index for the current page
-            const startIndex = (page - 1) * rowsPerPage;
-            const endIndex = Math.min(startIndex + rowsPerPage, users.length);
-
-            // Create table rows for the current page
-            for (let i = startIndex; i < endIndex; i++) {
-                const user = users[i];
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phoneNo || 'N/A'}</td>
-                  
-                    <td>${user.location || 'N/A'}</td>
-                    <td>${new Date(user.createdAt).toLocaleDateString() || 'N/A'}</td>
-                    <td><a href="./delete-account.php">Delete</a></td>
-                `;
-                tbody.appendChild(row);
+    try {
+        const response = await fetch(`${apiUrl}/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': authToken
             }
+        });
 
-            // Render pagination controls
-            renderPagination();
+        if (response.ok) {
+            alert("User deleted successfully.");
+            // Refresh the table by fetching updated user data
+            fetchUsers();
+        } else {
+            const error = await response.json();
+            alert(`Failed to delete user: ${error.message}`);
         }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        alert('An error occurred while trying to delete the user.');
+    }
+}
+
+// Function to render table rows dynamically
+function renderTable(page = 1) {
+    const tbody = document.getElementById('user-table-body');
+    tbody.innerHTML = ''; // Clear previous data
+
+    // Calculate start and end index for the current page
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, users.length);
+
+    // Create table rows for the current page
+    for (let i = startIndex; i < endIndex; i++) {
+        const user = users[i];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.phoneNo || 'N/A'}</td>
+            <td>${user.location || 'N/A'}</td>
+            <td>${new Date(user.createdAt).toLocaleDateString() || 'N/A'}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    }
+
+    // Render pagination controls
+    renderPagination();
+}
+
 
         // Function to render pagination controls dynamically
         function renderPagination() {
