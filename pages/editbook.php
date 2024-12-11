@@ -126,7 +126,7 @@
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
                     <label class="form-label">Number of Books Present:</label>
-                    <input type="number" id="timesBorrowed" name="timesBorrowed" class="form-control" required>
+                    <input type="number" id="timesBorrowed" name="timesBorrowed" class="form-control">
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
                     <label class="form-label"></label>
-                    <input type="file" id="coverImage" name="coverImage" class="form-control" required>
+                    <input type="file" id="coverImage" name="coverImage" class="form-control">
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
                     <label class="form-label"></label>
-                    <input type="text" id="isbn" name="isbn" class="form-control" required>
+                    <input type="text" id="isbn" name="isbn" class="form-control" placeholder="ISBN" required>
                 </div>
             </div>
 
@@ -261,7 +261,7 @@ document.getElementById('bookForm').addEventListener('submit', async function(ev
             author: document.getElementById('author').value,
             description: document.getElementById('description').value,
             availability: document.getElementById('availability').value === 'true',
-            coverImage: coverImageId, // Include only if a new image was uploaded.
+            //coverImage: coverImageId, // Include only if a new image was uploaded.
             genre: document.getElementById('genre').value,
             language: document.getElementById('language').value,
             pages: parseInt(document.getElementById('pages').value, 10),
