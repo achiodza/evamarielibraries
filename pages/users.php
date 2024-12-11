@@ -201,7 +201,7 @@ function renderTable(page = 1) {
         const user = users[i];
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td class="text-xs text-secondary mb-0">${user.username}</td>
+            <td class="text-xs text-secondary mb-0" style="margin-left:1%">${user.username}</td>
             <td class="text-xs text-secondary mb-0">${user.email}</td>
             <td class="text-xs text-secondary mb-0">${user.phoneNo || 'N/A'}</td>
             <td class="text-xs text-secondary mb-0">${user.location || 'N/A'}</td>
