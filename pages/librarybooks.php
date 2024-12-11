@@ -132,132 +132,143 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchBooks(url);
     };
 
-    // Fetch books from a given URL and populate the table
-    const fetchBooks = (url) => {
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            populateTable(data.data);
+ 
+// Fetch books from a given URL and populate the table
+const fetchBooks = (url) => {
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer 8a751582219d16d9a8a64c10e4b419b9763acb0f90d3b1dcf9ab978308ff4c5585ee8b2fb516b57c86646d2620afe2acff22194957bb09fceccb71e8cbec9850c710eb3c4aecb0257e5839e5235c960e11d3444edd60e0b00e7681d912c5b3d55013f9207d52ee111dc81d861f972e7b5cd25628a8c2f9dba50cceec04dfed25',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        populateTable(data.data);
 
-            // Update pagination controls
-            if (data.meta) {
-                document.getElementById('page-number').textContent = `Page ${currentPage}`;
-                document.getElementById('prev-page').disabled = currentPage === 1;
-                document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
-            }
-        })
-        .catch(error => console.error('Error fetching books:', error));
-    };
+        // Update pagination controls
+        if (data.meta) {
+            document.getElementById('page-number').textContent = `Page ${currentPage}`;
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = data.meta.pagination.page === data.meta.pagination.pageCount;
+        }
+    })
+    .catch(error => console.error('Error fetching books:', error));
+};
 
-    // Populate the table with book data
-    const populateTable = (books) => {
-        const tableBody = document.getElementById('book-table-body');
-        tableBody.innerHTML = ''; // Clear existing data
+// Populate the table with book data
+const populateTable = (books) => {
+    const tableBody = document.getElementById('book-table-body');
+    tableBody.innerHTML = ''; // Clear existing data
 
-        books.forEach(book => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>
-                    <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
-                            <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
-                        </div>
+    books.forEach(book => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${book.attributes.title}</h6>
+                        <p class="text-xs text-secondary mb-0">${book.attributes.author}</p>
                     </div>
-                </td>
-                <td>
-                    <p class="text-xs mb-0">${book.attributes.description}</p>
-                </td>
-                <td>
-                    <p class="text-xs mb-0">${book.attributes.genre}</p>
-                </td>
-                <td>
-                    <p class="text-xs mb-0">${book.attributes.availability ? 'Available' : 'Unavailable'}</p>
-                </td>
-                <td>
-                    <a href="#" class="text-secondary font-weight-bold text-xs" data-book-id="${book.id}" 
-                    onclick="saveBookData(${book.id}, '${book.attributes.title}', '${book.attributes.author}', '${book.attributes.genre}', '${book.attributes.language}', '${book.attributes.pages}', '${book.attributes.publicationDate}', '${book.attributes.rating}', '${book.attributes.timesBorrowed}', '${book.attributes.description}', '${book.attributes.availability}', '${book.attributes.isbn}')">
+                </div>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.description}</p>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.genre}</p>
+            </td>
+            <td>
+                <p class="text-xs mb-0">${book.attributes.availability ? 'Available' : 'Unavailable'}</p>
+            </td>
+            <td>
+                <a href="#" 
+                    class="text-secondary font-weight-bold text-xs" 
+                    data-book-id="${book.id}" 
+                    data-title="${book.attributes.title.replace(/'/g, "&#39;")}" 
+                    data-author="${book.attributes.author.replace(/'/g, "&#39;")}" 
+                    data-genre="${book.attributes.genre.replace(/'/g, "&#39;")}" 
+                    data-language="${book.attributes.language.replace(/'/g, "&#39;")}" 
+                    data-pages="${book.attributes.pages}" 
+                    data-publication-date="${book.attributes.publicationDate}" 
+                    data-rating="${book.attributes.rating}" 
+                    data-times-borrowed="${book.attributes.timesBorrowed}" 
+                    data-description="${book.attributes.description.replace(/'/g, "&#39;")}" 
+                    data-availability="${book.attributes.availability}" 
+                    data-isbn="${book.attributes.isbn}">
                         Edit
-                    </a>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-    };
-
-    // Search functionality
-    document.getElementById('search-input').addEventListener('input', (event) => {
-        const query = event.target.value.trim().toLowerCase();
-
-        if (query.length > 0) {
-            const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&filters[$or][0][title][$containsi]=${query}&filters[$or][1][author][$containsi]=${query}`;
-            fetchBooks(url);
-        } else {
-            // Reload paginated data when search is cleared
-            fetchData(currentPage);
-        }
+                </a>
+            </td>
+        `;
+        tableBody.appendChild(row);
     });
+};
 
-    // Initial fetch for paginated data
-    fetchData(currentPage);
+// Search functionality
+document.getElementById('search-input').addEventListener('input', (event) => {
+    const query = event.target.value.trim().toLowerCase();
 
-    // Pagination controls
-    document.getElementById('prev-page').addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            fetchData(currentPage);
-        }
-    });
-
-    document.getElementById('next-page').addEventListener('click', () => {
-        currentPage++;
+    if (query.length > 0) {
+        const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&filters[$or][0][title][$containsi]=${query}&filters[$or][1][author][$containsi]=${query}`;
+        fetchBooks(url);
+    } else {
+        // Reload paginated data when search is cleared
         fetchData(currentPage);
-    });
+    }
 });
 
-// Save book data function
-function saveBookData(bookId, title, author, genre, language, pages, publicationDate, rating, timesBorrowed, description, availability, isbn) {
-    localStorage.setItem('editBook', JSON.stringify({
-        id: bookId,
-        title: title,
-        author: author,
-        genre: genre,
-        language: language,
-        pages: pages,
-        publicationDate: publicationDate,
-        rating: rating,
-        timesBorrowed: timesBorrowed,
-        description: description,
-        availability: availability,
-        isbn: isbn
-    }));
+// Initial fetch for paginated data
+let currentPage = 1; // Ensure currentPage is declared
+const fetchData = (page) => {
+    const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=10`;
+    fetchBooks(url);
+};
+fetchData(currentPage);
 
-    window.location.href = `./editbook.php?bookId=${bookId}`;
+// Pagination controls
+document.getElementById('prev-page').addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        fetchData(currentPage);
+    }
+});
+
+document.getElementById('next-page').addEventListener('click', () => {
+    currentPage++;
+    fetchData(currentPage);
+});
+
+// Handle clicks on the Edit button
+document.addEventListener('click', function (event) {
+    if (event.target.matches('[data-book-id]')) {
+        const link = event.target;
+        const bookData = {
+            id: link.getAttribute('data-book-id'),
+            title: link.getAttribute('data-title'),
+            author: link.getAttribute('data-author'),
+            genre: link.getAttribute('data-genre'),
+            language: link.getAttribute('data-language'),
+            pages: link.getAttribute('data-pages'),
+            publicationDate: link.getAttribute('data-publication-date'),
+            rating: link.getAttribute('data-rating'),
+            timesBorrowed: link.getAttribute('data-times-borrowed'),
+            description: link.getAttribute('data-description'),
+            availability: link.getAttribute('data-availability'),
+            isbn: link.getAttribute('data-isbn'),
+        };
+        saveBookData(bookData);
+    }
+});
+
+function saveBookData(book) {
+    console.log('Book data:', book);
+    // Save data to localStorage
+    localStorage.setItem('editBook', JSON.stringify(book));
+
+    // Redirect to edit page
+    window.location.href = `./editbook.php?bookId=${book.id}`;
 }
 </script>
 
-  
-  </main>
- 
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
