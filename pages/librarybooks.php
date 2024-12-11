@@ -130,7 +130,7 @@
                 // const fetchData = (page) => {
                 //     const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
                 //     fetchBooks(url);
-                // };
+                 };
 
             
             // Fetch books from a given URL and populate the table
@@ -266,8 +266,10 @@
 
                 // Redirect to edit page
                 window.location.href = `./editbook.php?bookId=${book.id}`;
-            };
-    </script>
+            }
+        
+    
+  </script>
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
