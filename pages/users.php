@@ -40,7 +40,20 @@
             background-color: #cccccc;
             cursor: not-allowed;
         }
+
+        .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
 </style>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
