@@ -201,11 +201,11 @@ function renderTable(page = 1) {
         const user = users[i];
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${user.username}</td>
-            <td>${user.email}</td>
-            <td>${user.phoneNo || 'N/A'}</td>
-            <td>${user.location || 'N/A'}</td>
-            <td>${new Date(user.createdAt).toLocaleDateString() || 'N/A'}</td>
+            <td class="text-xs text-secondary mb-0">${user.username}</td>
+            <td class="text-xs text-secondary mb-0">${user.email}</td>
+            <td class="text-xs text-secondary mb-0">${user.phoneNo || 'N/A'}</td>
+            <td class="text-xs text-secondary mb-0">${user.location || 'N/A'}</td>
+            <td class="text-xs text-secondary mb-0">${new Date(user.createdAt).toLocaleDateString() || 'N/A'}</td>
             <td>
                 <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
             </td>
