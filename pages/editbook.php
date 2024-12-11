@@ -104,7 +104,7 @@
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
                     <label class="form-label"></label>
-                    <input type="number" id="pages" name="pages" class="form-control" required>
+                    <input type="text" id="pages" name="pages" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -119,7 +119,7 @@
             <div class="col-md-6">
             <div class="input-group input-group-outline">
                 <label class="form-label"></label>
-                <input type="number" step="0.1" id="rating" name="rating" class="form-control" required min="0" max="5">
+                <input type="number" step="0.1" id="rating" name="rating" class="form-control" min="0" max="5">
             </div>
 
             </div>
