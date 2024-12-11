@@ -126,11 +126,11 @@
                 
                 const pageSize = 10; // Number of items per page
 
-                // Fetch and populate data with pagination
-                // const fetchData = (page) => {
+                //Fetch and populate data with pagination
+                // const fetchbigData = (page) => {
                 //     const url = `https://admin.evamarielibraries.org/api/books-metas/?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
                 //     fetchBooks(url);
-                 };
+                 });
 
             
             // Fetch books from a given URL and populate the table
