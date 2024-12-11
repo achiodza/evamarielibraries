@@ -104,7 +104,7 @@
             <div class="col-md-6">
                 <div class="input-group input-group-outline">
                     <label class="form-label"></label>
-                    <input type="text" id="pages" name="pages" class="form-control" required>
+                    <input type="number" id="pages" name="pages" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -119,7 +119,7 @@
             <div class="col-md-6">
             <div class="input-group input-group-outline">
                 <label class="form-label"></label>
-                <input type="text" step="0.1" id="rating" name="rating" class="form-control" min="0" max="5">
+                <input type="number" step="0.1" id="rating" name="rating" class="form-control" min="0" max="5">
             </div>
 
             </div>
@@ -264,9 +264,9 @@ document.getElementById('bookForm').addEventListener('submit', async function(ev
             //coverImage: coverImageId, // Include only if a new image was uploaded.
             genre: document.getElementById('genre').value,
             language: document.getElementById('language').value,
-            pages: parseInt(document.getElementById('pages').value, 10),
+            pages: document.getElementById('pages').value,
             publicationDate: document.getElementById('publicationDate').value,
-            rating: parseFloat(document.getElementById('rating').value),
+            rating: document.getElementById('rating').value,
             timesBorrowed: parseInt(document.getElementById('timesBorrowed').value, 10),
             isbn: document.getElementById('isbn').value
         };
