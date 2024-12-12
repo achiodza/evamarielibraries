@@ -154,7 +154,7 @@
                             <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
                         </td>
                         <td class="align-middle text-center">
-                          <button class="btn btn-danger btn-sm" onclick="deleteBook('${book.id}', this)">Delete</button>
+                          <button class="btn btn-danger btn-sm" onclick="deleteBook('${book.id}', this)">Return</button>
                         </td>
 
 
@@ -205,14 +205,14 @@
     })
       .then((response) => {
         if (response.ok) {
-          alert('Book deleted successfully!');
+          alert('Book retuned successfully!');
           const tableRow = button.closest('tr'); // Remove the table row from the DOM
           tableRow.remove();
         } else {
-          throw new Error('Failed to delete the book.');
+          throw new Error('Failed to Returning the book.');
         }
       })
-      .catch((error) => console.error('Error deleting book:', error));
+      .catch((error) => console.error('Error Returning book:', error));
   }
 
     // Call `addEventListeners` to attach event listeners after the DOM is loaded
