@@ -121,10 +121,11 @@
                             <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
                         </td>
                         <td class="align-middle">
-                            <a class="btn text-secondary font-weight-bold text-xs return-btn" data-book-id="${book.id}" data-original-title="Edit user">
-                                Return
-                            </a>
+                          <a class="btn text-secondary font-weight-bold text-xs delete-btn" data-book-id="${book.id}" data-original-title="Delete Book">
+                            Return
+                          </a>
                         </td>
+
                     `;
 
                     tableBody.appendChild(row);
@@ -161,8 +162,8 @@
   </main>
 
   <script>
-      // Delete Borrowed Book Record
-  function deleteBorrowedBook(bookId, button) {
+  // Delete Book Record
+  function deleteBook(bookId, button) {
     fetch(`https://admin.evamarielibraries.org/api/borrowedbooks/${bookId}`, {
       method: 'DELETE',
       headers: {
@@ -173,8 +174,8 @@
       .then((response) => {
         if (response.ok) {
           alert('Book returned successfully!');
-          const listItem = button.closest('li');
-          listItem.remove(); // Remove the returned book from the list
+          const tableRow = button.closest('tr'); // Adjust to your table structure
+          tableRow.remove(); // Remove the deleted book from the table
         } else {
           throw new Error('Failed to return the book.');
         }
@@ -182,27 +183,23 @@
       .catch((error) => console.error('Error returning book:', error));
   }
 
-   // Add Event Listeners for Approve and Return Buttons
-   function addEventListeners() {
-    // Approve Button
-    document.querySelectorAll('.approve-btn').forEach((button) => {
+  // Add Event Listeners for Delete Buttons
+  function addEventListeners() {
+    // Delete Button
+    document.querySelectorAll('.delete-btn').forEach((button) => {
       button.addEventListener('click', function () {
         const bookId = this.getAttribute('data-book-id');
-        updateBookAvailability(bookId, this);
-      });
-    });
-
-    // Return Button
-    document.querySelectorAll('.return-btn').forEach((button) => {
-      button.addEventListener('click', function () {
-        const bookId = this.getAttribute('data-book-id');
-        if (confirm('Are you sure you want to return this book?')) {
-          deleteBorrowedBook(bookId, this);
+        if (confirm('Are you sure you want to Return this book?')) {
+          deleteBook(bookId, this);
         }
       });
     });
   }
-  </script>
+
+  // Call `addEventListeners` to attach event listeners after the DOM is loaded
+  document.addEventListener('DOMContentLoaded', addEventListeners);
+</script>
+
   
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
