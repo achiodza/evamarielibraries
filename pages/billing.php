@@ -23,6 +23,39 @@
 
 </head>
 
+<style>
+   
+    .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .pagination button.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+</style>
+
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
@@ -120,11 +153,10 @@
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">${new Date(book.attributes.updatedAt).toLocaleDateString()}</span>
                         </td>
-                        <td class="align-middle">
-                          <a class="btn text-secondary font-weight-bold text-xs delete-btn" data-book-id="${book.id}" data-original-title="Delete Book">
-                            Return
-                          </a>
+                        <td class="align-middle text-center">
+                          <button class="btn btn-danger btn-sm" onclick="deleteBook('${book.id}', this)">Delete</button>
                         </td>
+
 
                     `;
 
@@ -173,31 +205,18 @@
     })
       .then((response) => {
         if (response.ok) {
-          alert('Book returned successfully!');
-          const tableRow = button.closest('tr'); // Adjust to your table structure
-          tableRow.remove(); // Remove the deleted book from the table
+          alert('Book deleted successfully!');
+          const tableRow = button.closest('tr'); // Remove the table row from the DOM
+          tableRow.remove();
         } else {
-          throw new Error('Failed to return the book.');
+          throw new Error('Failed to delete the book.');
         }
       })
-      .catch((error) => console.error('Error returning book:', error));
+      .catch((error) => console.error('Error deleting book:', error));
   }
 
-  // Add Event Listeners for Delete Buttons
-  function addEventListeners() {
-    // Delete Button
-    document.querySelectorAll('.delete-btn').forEach((button) => {
-      button.addEventListener('click', function () {
-        const bookId = this.getAttribute('data-book-id');
-        if (confirm('Are you sure you want to Return this book?')) {
-          deleteBook(bookId, this);
-        }
-      });
-    });
-  }
-
-  // Call `addEventListeners` to attach event listeners after the DOM is loaded
-  document.addEventListener('DOMContentLoaded', addEventListeners);
+    // Call `addEventListeners` to attach event listeners after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', addEventListeners);
 </script>
 
   

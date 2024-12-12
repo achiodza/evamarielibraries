@@ -260,9 +260,7 @@
             });
 
             function saveBookData(book) {
-                console.log('        
-                
-                data:', book);
+                console.log('data:', book);
                 // Save data to localStorage
                 localStorage.setItem('editBook', JSON.stringify(book));
 
